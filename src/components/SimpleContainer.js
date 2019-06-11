@@ -4,18 +4,25 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import SingleLineGridList from './TaskGrid'
 import Switch from '@material-ui/core/Switch';
+import './Container.css';
 
 function SimpleContainer() {
   return (
+    
     <React.Fragment>
-      <CssBaseline />
-      <Container maxWidth="sm">
+      
+      <div>
+
         <Switch/>
-        <h2>Junho:</h2>
-        <SingleLineGridList>caraaai</SingleLineGridList>
-        <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
+        <p>Junho</p>
+        <SingleLineGridList/>
         
-      </Container>
+        <Switch/>
+        <p>Março</p>
+        <SingleLineGridList/>
+        
+
+      </div>
     </React.Fragment>
   );
 }
