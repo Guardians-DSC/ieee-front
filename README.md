@@ -3,10 +3,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Before anything:
 
 ### `npm install`
-### `npm install @material-ui/core`
-### `npm install @material-ui/icons`
+### `npm install @material-ui/core` (Just for safety)
+### `npm install @material-ui/icons` (Just for safety)
 
-### Both as adm
+ Both as adm
 
 ## Available Scripts
 
