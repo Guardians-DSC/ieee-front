@@ -1,13 +1,14 @@
-import React from 'react';
-import Dash from './components/Dashboard/Dashboard';
+
+import React, { Component } from 'react'
+import Dashboard from './components/Dashboard/Dashboard';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App" >
-        <Dash/>
-    </div>
-  );
+export default class App extends Component {
+    render() {
+        return (
+            <div className="App" >
+                <Dashboard showType={this.props.showType}/>
+            </div>
+          );
+    }
 }
-
-export default App;

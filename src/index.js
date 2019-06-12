@@ -11,7 +11,7 @@ ReactDOM.render(
         <SideBar/>
         <BrowserRouter>
             <Switch>
-                <Route path='/' extract={true} component={App}/>
+                <Route path='/' extract={true} component={(props)=><App showType={'task'}/>}/>
             </Switch>
         </BrowserRouter>
     </div>

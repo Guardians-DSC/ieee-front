@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import {Row} from 'antd';
 import Task from '../Task/Task';
+import Member from '../Member/Member';
 
 const tasks = [
     {
@@ -47,6 +48,59 @@ const tasks = [
     },
 ];
 
+const members = [
+    {
+        'name': 'Membro 0',
+        'description': 'Informações do Membro 0',
+        'key': '0'
+    },
+
+    {
+        'name': 'Membro 1',
+        'description': 'Informações do Membro 1',
+        'key': '1'
+    },
+
+    {
+        'name': 'Membro 2',
+        'description': 'Informações do Membro 2',
+        'key': '2'
+    },
+
+    {
+        'name': 'Membro 3',
+        'description': 'Informações do Membro 3',
+        'key': '3'
+    },
+
+    {
+        'name': 'Membro 4',
+        'description': 'Informações do Membro 4',
+        'key': '4'
+    },
+
+    {
+        'name': 'Membro 5',
+        'description': 'Informações do Membro 5',
+        'key': '5'
+    },
+
+    {
+        'name': 'Membro 6',
+        'description': 'Informações do Membro 6',
+        'key': '6'
+    },
+];
+
+const membersList = members.map((member) => 
+    <Member
+        title = {member.name}
+        description = {member.description}
+        key = {member.key}
+
+    />
+)
+
 const tasksList = tasks.map((task) => 
     <Task
         title = {task.title}
@@ -55,20 +109,27 @@ const tasksList = tasks.map((task) =>
     />
 )
 
+
+
 export default class Dashboard extends Component {
 
     constructor(props) {
         super(props);
         this.state = { 
-            tasks: tasks
+            tasks: tasks,
+            info: null
         }
+    }
+
+    componentWillMount() {
+        this.props.showType === 'task' ? this.state.info = tasksList : this.state.info = membersList;
     }
 
     render() {
         return (
             <div style={{ background: '#ECECEC', padding: '30px' }} >
                 <Row gutter={16} >
-                    {tasksList}
+                    {this.state.info}
                 </Row>
             </div>
         )
