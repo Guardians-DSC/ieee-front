@@ -21,7 +21,10 @@ export default class SideBar extends Component {
         return (
             <Layout style={{height:'100vh'}}>
                 <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-                    <div className="logo" />
+                    <div className="logo">
+                        <img src="https://libapps-au.s3-ap-southeast-2.amazonaws.com/accounts/139828/images/IEEELogo.png" alt="logo ieee"/>
+                        <h4 text-color='white'>IEEE Task Manager</h4>
+                    </div>
                     <Menu
                         theme='dark'
                         mode='inline'

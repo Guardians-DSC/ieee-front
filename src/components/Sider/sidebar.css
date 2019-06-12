@@ -1,5 +1,15 @@
 .logo {
-    height: 32px;
+    height: 50px;
     background: rgba(255, 255, 255, 0.2);
     margin: 16px;
+    display: flex;
+    overflow: hidden;
+    
   }
+img{
+  max-width: 50px;
+  max-height: 168px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
