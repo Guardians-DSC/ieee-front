@@ -7,6 +7,7 @@ import Modal from '../Task/TaskRegisterModal';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
+const imgSrc = "https://i1.wp.com/ieeer8.org/wp-content/uploads/2016/04/ieeelogo_512_transparent.png?fit=512%2C512&ssl=1";
 
 export default class SideBar extends Component {
 
@@ -34,8 +35,8 @@ export default class SideBar extends Component {
             <Layout style={{height:'100vh'}}>
                 <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
                     <div className="logo">
-                        <img src="https://libapps-au.s3-ap-southeast-2.amazonaws.com/accounts/139828/images/IEEELogo.png" alt="logo ieee"/>
-                        <h4 text-color='white'>IEEE Task Manager</h4>
+                        <img className="i3eIcon" src={imgSrc} alt="logo ieee"/>
+                        <h4 className="i3eTitle">IEEE Task Manager</h4>
                     </div>
                     <Menu
                         theme='dark'
