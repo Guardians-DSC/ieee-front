@@ -4,9 +4,10 @@ import 'antd/dist/antd.css';
 import './sidebar.css'
 
 import Modal from '../Task/TaskRegisterModal';
+import Dash from '../Dashboard/Dashboard'
 
 const { SubMenu } = Menu;
-const { Sider } = Layout;
+const { Sider, Content } = Layout;
 const imgSrc = "https://i1.wp.com/ieeer8.org/wp-content/uploads/2016/04/ieeelogo_512_transparent.png?fit=512%2C512&ssl=1";
 
 export default class SideBar extends Component {
@@ -32,7 +33,7 @@ export default class SideBar extends Component {
 
     render() {
         return (
-            <Layout style={{height:'100vh'}}>
+            <Layout>
                 <Sider
                     breakpoint="lg"
                     collapsedWidth="0"
@@ -42,6 +43,7 @@ export default class SideBar extends Component {
                     onCollapse={(collapsed, type) => {
                       console.log(collapsed, type);
                     }}
+                    style={{height:'100vh', minHeight:'100vh'}}
                 >
                     
                     <div className="logo">

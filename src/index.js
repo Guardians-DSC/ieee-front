@@ -8,7 +8,6 @@ import SideBar from './components/Sider/SideBar'
 
 ReactDOM.render(
     <div style={{display:'flex'}}>
-        <SideBar/>
         <BrowserRouter>
             <Switch>
                 <Route path='/' extract={true} component={(props)=><App showType={'task'}/>}/>
