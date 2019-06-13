@@ -130,7 +130,7 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div style={{ background: '#ECECEC', padding: '30px'}} >
-                <Row gutter={{xs: 16, md:4, sm:1}} style={{flexBasis:'50%'}} type='flex' >
+                <Row gutter={{xs:8, sm:12}} style={{flexBasis:'50%'}} >
                     {this.state.info}
                 </Row>
             </div>

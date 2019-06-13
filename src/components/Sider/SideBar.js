@@ -34,14 +34,13 @@ export default class SideBar extends Component {
         return (
             <Layout style={{height:'100vh'}}>
                 <Sider
-                    style={{width:'14vh'}}
-                    breakpoint='lg'
-                    collapsedWidth='0'
+                    breakpoint="lg"
+                    collapsedWidth="0"
                     onBreakpoint={broken => {
-                        console.log(broken);
+                      console.log(broken);
                     }}
                     onCollapse={(collapsed, type) => {
-                        console.log(collapsed, type);
+                      console.log(collapsed, type);
                     }}
                 >
                     
