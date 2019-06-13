@@ -28,15 +28,16 @@ export default class SideBar extends Component {
         return (
             <Layout>
                 <Sider
-                    breakpoint="lg"
-                    collapsedWidth="0"
+                    collapsible= 'true'
+                    breakpoint="xxl"
+                    collapsedWidth="12.5vh"
                     onBreakpoint={broken => {
                       console.log(broken);
                     }}
                     onCollapse={(collapsed, type) => {
                       console.log(collapsed, type);
                     }}
-                    style={{height:'100vh', minHeight:'100vh'}}
+                    style={{height:'100%', minHeight:'100vh'}}
                 >
                     
                     <div className="logo">
