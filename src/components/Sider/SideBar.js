@@ -36,7 +36,7 @@ export default class SideBar extends Component {
                 <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
                     <div className="logo">
                         <img className="i3eIcon" src={imgSrc} alt="logo ieee"/>
-                        <h4 className="i3eTitle">IEEE Task Manager</h4>
+                        <h3 className="i3eTitle">IEEE Task Manager</h3>
                     </div>
                     <Menu
                         theme='dark'
