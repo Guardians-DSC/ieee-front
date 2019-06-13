@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
-import './sidebar.css'
+import './sidebar.css';
 
 import Modal from '../Task/TaskRegisterModal';
-import Dash from '../Dashboard/Dashboard'
 
 const { SubMenu } = Menu;
 const { Sider, Content } = Layout;
@@ -15,21 +14,15 @@ export default class SideBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            collapsed: false,
-            /* registration: false, */
-        }
-        
+            isOpen: false
+        }        
     }
 
-    onCollapse = (collapsed) => {
-        this.setState({ collapsed });
-    }
-
-    /* handleRegistration = () => {
+    openModal = () => {
         this.setState({
-            registration: true
+            isOpen: !this.state.isOpen
         })
-    } */
+    }
 
     render() {
         return (
@@ -67,13 +60,15 @@ export default class SideBar extends Component {
                         >
                             <Menu.Item 
                                 key="1"
-                                onClick={this.handleRegistration}
+                                onClick={this.openModal}
                             >
                                 Cadastrar Atividade
                             </Menu.Item>
                             <Menu.Item key="2">Remover Atividade</Menu.Item>
                             <Menu.Item key="3">Editar Atividade</Menu.Item>
                             {/* {this.state.registration ? <Modal visible={this.state.registration} /> : null} */}
+
+                            <Modal show={this.state.isOpen} onClose={this.openModal}/>
 
                         </SubMenu>
                         <SubMenu

@@ -1,58 +1,37 @@
 import React, { Component } from 'react'
 import {Modal, Button} from 'antd';
+import PropTypes from 'prop-types';
+import Register from './TaskRegister';
 
 
-export default class TaskRegisterModal extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            loading: false,
-            visible: this.props.visible,
-        }
-    }
-
-    handleOk = () => {
-        this.setState({
-            loading: false,
-            visible: !this.props.visible,
-        });
-    };
-
-    handleCancel = () => {
-        this.setState({ visible: false });
-    };
+class TaskRegisterModal extends React.Component  {
 
     render() {
 
-        const {visible, loading} = this.state;
-
+        if (!this.props.show) {
+            return null
+        }
+        
         return (
             <div>
                 <Modal 
-                    visible={visible}
+                    visible={true}
                     title="Cadastro de Atividade"
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    footer={[
-                        <Button 
-                            key='back'
-                            onClick={this.handleCancel}
-                        >
-                        Return 
-                        </Button>,
-                        <Button 
-                            key='submit'
-                            type="primary"
-                            onClick={this.handleOk}
-                        >
-                        Submit 
-                        </Button>
-                    ]}
+                    onOk={this.props.onClose}
+                    onCancel={this.props.onClose}
+                    footer={null}
                 >
-
+                    <Register/>
                 </Modal>
             </div>
         )
     }
 }
+
+TaskRegisterModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    children: PropTypes.node
+}
+
+export default TaskRegisterModal;
