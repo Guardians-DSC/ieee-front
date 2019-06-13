@@ -3,19 +3,31 @@ import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
 import './sidebar.css'
 
+import Modal from '../Task/TaskRegisterModal';
+
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 export default class SideBar extends Component {
 
-    state = {
-        collapsed: false,
+    constructor(props) {
+        super(props)
+        this.state = {
+            collapsed: false,
+            /* registration: false, */
+        }
+        
     }
 
     onCollapse = (collapsed) => {
         this.setState({ collapsed });
     }
-    
+
+    /* handleRegistration = () => {
+        this.setState({
+            registration: true
+        })
+    } */
 
     render() {
         return (
@@ -40,15 +52,22 @@ export default class SideBar extends Component {
                                 </span>
                             }
                         >
-                            <Menu.Item key="1">Cadastrar Atividade</Menu.Item>
+                            <Menu.Item 
+                                key="1"
+                                onClick={this.handleRegistration}
+                            >
+                                Cadastrar Atividade
+                            </Menu.Item>
                             <Menu.Item key="2">Remover Atividade</Menu.Item>
                             <Menu.Item key="3">Editar Atividade</Menu.Item>
+                            {/* {this.state.registration ? <Modal visible={this.state.registration} /> : null} */}
+
                         </SubMenu>
                         <SubMenu
                             key='sub2'
                             title = {
                                 <span>
-                                    <Icon type="team" />
+                                    <Icon type="user" />
                                     <span>
                                         Membros
                                     </span>

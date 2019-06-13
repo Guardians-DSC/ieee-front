@@ -4,6 +4,8 @@ import {Row} from 'antd';
 import Task from '../Task/Task';
 import Member from '../Member/Member';
 
+import TaskRegister from '../Task/TaskRegister';
+
 const tasks = [
     {
         'title': 'Atividade 0',
