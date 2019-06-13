@@ -14,7 +14,7 @@ export default class Task extends Component {
     render() {
         return (
             <React.Fragment>
-                <Col span={8} style={{'marginBottom':'20px'}}>
+                <Col span={8} style={{'marginBottom':'20px'}} xs={24} sm={12} md={4} >
                     <Card title={this.props.title} bordered={true}>
                         {this.props.description}
                     </Card>

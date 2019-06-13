@@ -33,7 +33,18 @@ export default class SideBar extends Component {
     render() {
         return (
             <Layout style={{height:'100vh'}}>
-                <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+                <Sider
+                    style={{width:'14vh'}}
+                    breakpoint='lg'
+                    collapsedWidth='0'
+                    onBreakpoint={broken => {
+                        console.log(broken);
+                    }}
+                    onCollapse={(collapsed, type) => {
+                        console.log(collapsed, type);
+                    }}
+                >
+                    
                     <div className="logo">
                         <img className="i3eIcon" src={imgSrc} alt="logo ieee"/>
                         <h3 className="i3eTitle">IEEE Task Manager</h3>
