@@ -1,4 +1,4 @@
-import { Button, Form, Icon, Input, InputNumber, DatePicker, TimePicker } from 'antd';
+import { Button, Form,  Input, InputNumber, DatePicker, TimePicker } from 'antd';
 import * as React from 'react';
 
 const FormItem = Form.Item;

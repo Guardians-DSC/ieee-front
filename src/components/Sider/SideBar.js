@@ -66,8 +66,6 @@ export default class SideBar extends Component {
                             </Menu.Item>
                             <Menu.Item key="2">Remover Atividade</Menu.Item>
                             <Menu.Item key="3">Editar Atividade</Menu.Item>
-                            {/* {this.state.registration ? <Modal visible={this.state.registration} /> : null} */}
-
                             <Modal show={this.state.isOpen} onClose={this.openModal}/>
 
                         </SubMenu>
@@ -102,6 +100,11 @@ export default class SideBar extends Component {
                         </SubMenu>
                     </Menu>
                 </Sider>
+                <Layout>
+                    <Content style={{  overflow: 'initial' }}>
+                        {this.props.content}
+                    </Content>
+                </Layout>
             </Layout>
         )
     }

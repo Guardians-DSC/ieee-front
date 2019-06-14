@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Register from './TaskRegister';
 
 
-class TaskRegisterModal extends React.Component  {
+class TaskRegisterModal extends Component  {
 
     render() {
 
@@ -19,7 +19,12 @@ class TaskRegisterModal extends React.Component  {
                     title="Cadastro de Atividade"
                     onOk={this.props.onClose}
                     onCancel={this.props.onClose}
-                    footer={null}
+                    style={{top:0}}
+                    footer={[
+                        <Button type='submit' onClick={this.props.onClose}>
+                            Voltar
+                        </Button>
+                    ]}
                 >
                     <Register/>
                 </Modal>

@@ -4,8 +4,6 @@ import {Row} from 'antd';
 import Task from '../Task/Task';
 import Member from '../Member/Member';
 
-import TaskRegister from '../Task/TaskRegister';
-
 const tasks = [
     {
         'title': 'Atividade 0',
@@ -228,7 +226,7 @@ export default class Dashboard extends Component {
 
     render() {
         return (
-            <div style={{ background: '#ECECEC', padding: '30px', backgroundSize:'cover'}} >
+            <div style={{ background: '#ECECEC', padding: '30px'}} >
                 <Row gutter={{xs:4, sm:16}} style={{flexBasis:'50%'}} > 
                     {this.state.info}
                 </Row>
