@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
 import './sidebar.css';
-
 import Modal from '../Task/TaskRegisterModal';
 
 const { SubMenu } = Menu;

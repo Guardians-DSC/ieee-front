@@ -3,7 +3,6 @@ import Dashboard from './components/Dashboard/Dashboard';
 import SideBar from './components/Sider/SideBar'
 import './App.css';
 
-
 export default class App extends Component {
     render() {
         return (

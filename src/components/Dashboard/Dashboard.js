@@ -208,8 +208,6 @@ const tasksList = tasks.map((task) =>
     />
 )
 
-
-
 export default class Dashboard extends Component {
 
     constructor(props) {
@@ -227,8 +225,9 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div style={{ background: '#ECECEC', padding: '30px'}} >
-                <Row gutter={{xs:4, sm:16}} style={{flexBasis:'50%'}} > 
+                <Row gutter={{xs:4, sm:16}} style={{flexBasis:'50%'}}> 
                     {this.state.info}
+                    {console.log(this.mocagem)}
                 </Row>
             </div>
         )
