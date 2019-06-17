@@ -151,43 +151,50 @@ const members = [
     {
         'name': 'Membro 0',
         'description': 'Informações do Membro 0',
-        'key': '0'
+        'key': '0',
+        'id': '0'
     },
 
     {
         'name': 'Membro 1',
         'description': 'Informações do Membro 1',
-        'key': '1'
+        'key': '1',
+        'id': '1'
     },
 
     {
         'name': 'Membro 2',
         'description': 'Informações do Membro 2',
-        'key': '2'
+        'key': '2',
+        'id': '2'
     },
 
     {
         'name': 'Membro 3',
         'description': 'Informações do Membro 3',
-        'key': '3'
+        'key': '3',
+        'id': '3'
     },
 
     {
         'name': 'Membro 4',
         'description': 'Informações do Membro 4',
-        'key': '4'
+        'key': '4',
+        'id': '4'
     },
 
     {
         'name': 'Membro 5',
         'description': 'Informações do Membro 5',
-        'key': '5'
+        'key': '5',
+        'id': '5'
     },
 
     {
         'name': 'Membro 6',
         'description': 'Informações do Membro 6',
-        'key': '6'
+        'key': '6',
+        'id': '6'
     },
 ];
 
@@ -196,6 +203,7 @@ const membersList = members.map((member) =>
         title = {member.name}
         description = {member.description}
         key = {member.key}
+        id = {member.id}
 
     />
 )
