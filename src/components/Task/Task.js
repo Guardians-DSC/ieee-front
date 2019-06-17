@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import {Card, Col, Icon} from 'antd';
 
-Icon.setTwoToneColor('#eb2f96');
-Icon.getTwoToneColor(); // #eb2f96
-
 export default class Task extends Component {
-
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -14,19 +11,54 @@ export default class Task extends Component {
         };
     };
 
-    clicou(titulo) {
-        console.log('Clicou pra editar ' + titulo);
+    cardStyle = {
+        textAlign: 'center'
     }
 
-    deletar() {
-        console.log('vai deletar ? ')
+    editIcon = (
+        <Icon 
+            type="edit"
+            onClick={(e) => {this.editTask(this.props.id, e)}}
+            theme='twoTone'
+        />
+    );
+
+    removeIcon = (
+        <Icon
+            type="delete"
+            onClick={(e) => {this.removeTask(this.props.id, e)}}
+            theme='twoTone'
+            twoToneColor='#eb2f96'
+
+        />
+    )
+    
+    removeTask = (id, e) => {
+        console.log('Remover Atividade')
+        e.preventDefault();
+        console.log(id);
     }
+    
+    editTask = (id, e) => {
+        console.log('Editar Atividade');
+        e.preventDefault();
+        console.log(id)
+    }
+    
 
     render() {
         return (
             <React.Fragment>
                 <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={4} >
-                    <Card title={this.props.title} hoverable={true} extra={<Icon type="edit" />} actions={[<Icon type="delete" theme="twoTone" />]}>
+                    <Card
+                        title={this.props.title}
+                        hoverable={true}
+                        actions={
+                            [
+                            this.editIcon , this.removeIcon]
+                        }
+                        style={this.cardStyle}
+                    >
                         {this.props.description}
                     </Card>
                 </Col>
