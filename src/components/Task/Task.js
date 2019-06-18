@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import {Card, Col, Icon} from 'antd';
+import './task.css'
 
 const { Meta } = Card;
 
@@ -23,11 +24,17 @@ export default class Task extends Component {
         textOverflow:'clip',
     }
 
+
+    iconStyle = {
+        width:'100%'
+    }
+
     editIcon = (
         <Icon 
             type="edit"
             onClick={(e) => {this.editTask(this.props.id, e)}}
             theme='twoTone'
+            style={this.iconStyle}
         />
     );
 
@@ -37,6 +44,7 @@ export default class Task extends Component {
             onClick={(e) => {this.removeTask(this.props.id, e)}}
             theme='twoTone'
             twoToneColor='#eb2f96'
+            style={this.iconStyle}
 
         />
     )
@@ -59,6 +67,7 @@ export default class Task extends Component {
             <React.Fragment>
                 <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={4} >
                     <Card
+                        id='teste'
                         title={this.props.title}
                         hoverable={true}
                         actions={
@@ -67,7 +76,6 @@ export default class Task extends Component {
                         }
                         style={this.cardStyle}
                     >
-                        {/* {this.props.description} */}
                         <Meta style={this.metaStyle} description={this.props.description}/>
                     </Card>
                 </Col>

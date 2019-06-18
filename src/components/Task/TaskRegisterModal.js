@@ -19,7 +19,7 @@ class TaskRegisterModal extends Component  {
                     title="Cadastro de Atividade"
                     onOk={this.props.onClose}
                     onCancel={this.props.onClose}
-                    style={{top:0}}
+                    style={{top:'5rem'}}
                     footer={[
                         <Button type='submit' onClick={this.props.onClose}>
                             Voltar

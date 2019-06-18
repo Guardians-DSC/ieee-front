@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
-import {Card, Col, Icon} from 'antd';
+import {Card, Col, Icon, Button} from 'antd';
+import { shape } from 'prop-types';
 
 export default class Member extends Component {
 
@@ -15,11 +16,16 @@ export default class Member extends Component {
         textAlign: 'center'
     }
 
+    iconStyle = {
+        width:'13rem'
+    }
+
     editIcon = (
         <Icon 
             type="edit"
             onClick={(e) => {this.editMember(this.props.id, e)}}
             theme='twoTone'
+            style={this.iconStyle}
         />
     );
 
@@ -29,18 +35,18 @@ export default class Member extends Component {
             onClick={(e) => {this.removeMember(this.props.id, e)}}
             theme='twoTone'
             twoToneColor='#eb2f96'
-
+            style={this.iconStyle}
         />
     )
     
     removeMember = (id, e) => {
-        console.log('Remover Atividade')
+        console.log('Remover Membro')
         e.preventDefault();
         console.log(id);
     }
     
     editMember = (id, e) => {
-        console.log('Editar Atividade');
+        console.log('Editar Membro');
         e.preventDefault();
         console.log(id)
     }
