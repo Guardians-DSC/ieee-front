@@ -4,22 +4,33 @@ import {Row} from 'antd';
 import Task from '../Task/Task';
 import Member from '../Member/Member';
 
+const lorem = 'Lorem ipsum dolor sit amet consectetur adipiscing elit,' +
+            ' maecenas faucibus erat eleifend sapien ultrices aliquam,' +
+            ' proin dictumst sociis vehicula natoque nisl.';
+
+const ipsum = 'Praesent tempus aptent rhoncus vitae quis ultrices aliquam porta,' +
+            ' varius taciti justo sociis nullam nulla eu pulvinar,' +
+            ' leo molestie scelerisque malesuada hac lobortis vel.' +
+            ' Cum elementum cras hac ac maecenas habitasse nostra,' +
+            ' pharetra morbi egestas dui lacus neque magna sem, curabitur congue odio et primis ultrices.'
+
+
 const tasks = [
     {
         'title': 'Atividade 0',
-        'description': 'Descrição da Atividade 0',
+        'description': lorem,
         'key': 0
     },
 
     {
         'title': 'Atividade 1',
-        'description': 'Descrição da Atividade 1',
+        'description': ipsum,
         'key': 1
     },
 
     {
         'title': 'Atividade 2',
-        'description': 'Descrição da Atividade 2',
+        'description': lorem + ipsum,
         'key': 2
     },
 

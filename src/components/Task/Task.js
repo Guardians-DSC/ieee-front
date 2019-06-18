@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import {Card, Col, Icon} from 'antd';
 
+const { Meta } = Card;
+
 export default class Task extends Component {
     
     constructor(props) {
@@ -12,7 +14,13 @@ export default class Task extends Component {
     };
 
     cardStyle = {
-        textAlign: 'center'
+        textAlign: 'center',
+    }
+
+    metaStyle = {
+        maxHeight: '10rem',
+        overflowY:'scroll',
+        textOverflow:'clip',
     }
 
     editIcon = (
@@ -59,7 +67,8 @@ export default class Task extends Component {
                         }
                         style={this.cardStyle}
                     >
-                        {this.props.description}
+                        {/* {this.props.description} */}
+                        <Meta style={this.metaStyle} description={this.props.description}/>
                     </Card>
                 </Col>
             </React.Fragment>
