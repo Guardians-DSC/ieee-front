@@ -11,7 +11,8 @@ export default class Task extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isEdition: true
         };
     };
 
@@ -94,7 +95,7 @@ export default class Task extends Component {
                         }
                         style={this.cardStyle}
                     >
-                        <Modal show={this.state.isOpen} onClose={this.openModal}/>
+                        <Modal isEdition={this.state.isEdition} show={this.state.isOpen} onClose={this.openModal}/>
                         <Meta style={this.metaStyle} description={this.props.description}/>
                     </Card>
                 </Col>

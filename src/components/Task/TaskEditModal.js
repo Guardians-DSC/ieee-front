@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Modal, Button} from 'antd';
-import PropTypes from 'prop-types';
 import Register from './TaskRegister';
 
 
@@ -24,7 +23,7 @@ export default class TaskEditModal extends Component {
                         </Button>
                     ]}
                 >
-                    <Register/>
+                    <Register isEdition={this.props.isEdition}/>
                 </Modal>
             </div>
         )

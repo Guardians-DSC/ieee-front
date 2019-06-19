@@ -11,6 +11,14 @@ function hasErrors(fieldsError: any) {
 }
 
 class TaskRegister extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isEdition:this.props.isEdition
+        }
+    }
+
     componentDidMount() {
         this.props.form.validateFields();
     }
@@ -39,7 +47,7 @@ class TaskRegister extends React.Component {
             help={taskNameError || ''}
             >
             {getFieldDecorator('Nome da atividade', {
-                rules: [{ required: true, message: 'Por favor, informe o nome da atividade!' }],
+                rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o nome da atividade!' }],
             })(
                 <Input allowClear placeholder="Nome da atividade" />
             )}
@@ -49,7 +57,7 @@ class TaskRegister extends React.Component {
             help={taskTypeError || ''}
             >
             {getFieldDecorator('Tipo da atividade', {
-                rules: [{ required: true, message: 'Por favor, informe o tipo da atividade!' }],
+                rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o tipo da atividade!' }],
             })(
                 <Input allowClear placeholder="Tipo da atividade" />
             )}
@@ -61,9 +69,9 @@ class TaskRegister extends React.Component {
                 help={workloadError || ''}
             >
                 {getFieldDecorator('Carga Horária', {
-                rules: [{ required: true, message: 'Por favor, informe a carga horária!' }],
+                rules: [{ required: !this.state.isEdition, message: 'Por favor, informe a carga horária!' }],
                 })(
-                <InputNumber  min={0} defaultValue={0} placeholder="Carga Horária" style={{width:'90%'}}/>
+                <InputNumber  min={0}  placeholder="Carga Horária" style={{width:'90%'}}/>
                 )}
             </FormItem>
             <FormItem
@@ -72,7 +80,7 @@ class TaskRegister extends React.Component {
                 help={timeError || ''}
             >
                 {getFieldDecorator('Horário', {
-                rules: [{ required: true, message: 'Por favor, informe o horário' }],
+                rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o horário' }],
                 })(
                 <TimePicker format={timeFormat} placeholder="Horário" style={{width:'90%'}}/>
                 )}
@@ -83,7 +91,7 @@ class TaskRegister extends React.Component {
                 help={dateError || ''}
             >
             {getFieldDecorator('Data', {
-                rules: [{ required: true, message: 'Por favor, informe a data' }],
+                rules: [{ required: !this.state.isEdition, message: 'Por favor, informe a data' }],
             })(
                 <DatePicker format={dateFormat} placeholder="Data" />
             )}
@@ -93,7 +101,7 @@ class TaskRegister extends React.Component {
             {getFieldDecorator('Descrição da atividade', {
                 rules: [{ required: false}],
             })(
-                <TextArea allowClear rows={4} placeholder="Descrição da atividade" />
+                <TextArea allowclear="true" rows={4} placeholder="Descrição da atividade" />
             )}
             </FormItem>
             

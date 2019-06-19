@@ -13,7 +13,8 @@ export default class SideBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isEdition: false
         }        
     }
 
@@ -58,7 +59,7 @@ export default class SideBar extends Component {
                             >
                                 Cadastrar Atividade
                             </Menu.Item>
-                            <Modal show={this.state.isOpen} onClose={this.openModal}/>
+                            <Modal isEdition={false} show={this.state.isOpen} onClose={this.openModal}/>
 
                         </SubMenu>
                         <SubMenu

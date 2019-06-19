@@ -26,7 +26,7 @@ class TaskRegisterModal extends Component  {
                         </Button>
                     ]}
                 >
-                    <Register/>
+                    <Register isEdition={this.props.isEdition} />
                 </Modal>
             </div>
         )
