@@ -1,4 +1,4 @@
-import { Button, Form,  Input, InputNumber, DatePicker, TimePicker } from 'antd';
+import { Button, Form,  Input, InputNumber, DatePicker, TimePicker, Col } from 'antd';
 import * as React from 'react';
 
 const FormItem = Form.Item;
@@ -41,7 +41,7 @@ class TaskRegister extends React.Component {
           {getFieldDecorator('Nome da atividade', {
             rules: [{ required: true, message: 'Por favor, informe o nome da atividade!' }],
           })(
-            <Input placeholder="Nome da atividade" />
+            <Input allowClear placeholder="Nome da atividade" />
           )}
         </FormItem>
         <FormItem
@@ -51,46 +51,52 @@ class TaskRegister extends React.Component {
           {getFieldDecorator('Tipo da atividade', {
             rules: [{ required: true, message: 'Por favor, informe o tipo da atividade!' }],
           })(
-            <Input placeholder="Tipo da atividade" />
+            <Input allowClear placeholder="Tipo da atividade" />
           )}
         </FormItem>
-        <FormItem
-          validateStatus={workloadError ? 'error' : ''}
-          help={workloadError || ''}
-        >
-          {getFieldDecorator('Carga Horária', {
-            rules: [{ required: true, message: 'Por favor, informe a carga horária!' }],
-          })(
-            <InputNumber min={0} defaultValue={0} placeholder="Carga Horária" />
-          )}
-        </FormItem>
-        <FormItem>
-          {getFieldDecorator('Descrição da atividade', {
-            rules: [{ required: false}],
-          })(
-            <TextArea  rows={4} placeholder="Descrição da atividade" />
-          )}
-        </FormItem>
-        <FormItem
-          validateStatus={dateError ? 'error' : ''}
-          help={dateError || ''}
-        >
+        <Form.Item style={{marginBottom:0}}>
+          <FormItem
+            style={{ display: 'inline-block', width:'33.3%'}}
+            validateStatus={workloadError ? 'error' : ''}
+            help={workloadError || ''}
+          >
+            {getFieldDecorator('Carga Horária', {
+              rules: [{ required: true, message: 'Por favor, informe a carga horária!' }],
+            })(
+              <InputNumber  min={0} defaultValue={0} placeholder="Carga Horária" style={{width:'90%'}}/>
+            )}
+          </FormItem>
+          <FormItem
+            style={{ display: 'inline-block', width:'33.3%'}}
+            validateStatus={timeError ? 'error' : ''}
+            help={timeError || ''}
+          >
+            {getFieldDecorator('Horário', {
+              rules: [{ required: true, message: 'Por favor, informe o horário' }],
+            })(
+              <TimePicker format={timeFormat} placeholder="Horário" style={{width:'90%'}}/>
+            )}
+          </FormItem>
+          <FormItem
+            style={{ display: 'inline-block', width:'33.3%'}}
+            validateStatus={dateError ? 'error' : ''}
+            help={dateError || ''}
+          >
           {getFieldDecorator('Data', {
             rules: [{ required: true, message: 'Por favor, informe a data' }],
           })(
             <DatePicker format={dateFormat} placeholder="Data" />
           )}
         </FormItem>
-        <FormItem
-          validateStatus={timeError ? 'error' : ''}
-          help={timeError || ''}
-        >
-          {getFieldDecorator('Horário', {
-            rules: [{ required: true, message: 'Por favor, informe o horário' }],
+        </Form.Item>
+        <FormItem>
+          {getFieldDecorator('Descrição da atividade', {
+            rules: [{ required: false}],
           })(
-            <TimePicker format={timeFormat} placeholder="Horário" />
+            <TextArea allowClear rows={4} placeholder="Descrição da atividade" />
           )}
         </FormItem>
+        
         <FormItem>
           <Button
             type="primary"

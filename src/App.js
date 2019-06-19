@@ -6,7 +6,7 @@ import './App.css';
 export default class App extends Component {
     render() {
         return (
-            <div className="App" style={{overflowY: 'auto', display:'flex', position:'fixed', height:'100vh', left:0}}>
+            <div className="App" style={{display:'flex', position:'fixed', height:'100vh', left:0}}>
                 <SideBar/>
                 <Dashboard showType={this.props.showType}/>
             </div>

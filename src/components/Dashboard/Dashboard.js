@@ -242,10 +242,16 @@ export default class Dashboard extends Component {
         this.props.showType === 'task' ? this.state.info = tasksList : this.state.info = membersList;
     }
 
+    rowStyle = {
+        flexBasis:'50%',
+        height:'100vh',
+        overflowY:'auto'
+    }
+
     render() {
         return (
-            <div style={{ background: '#ECECEC', padding: '30px'}} >
-                <Row gutter={{xs:4, sm:16}} style={{flexBasis:'50%'}}> 
+            <div style={{ background: '#ECECEC', padding: '1rem'}} >
+                <Row gutter={{xs:4, sm:16}} style={this.rowStyle}> 
                     {this.state.info}
                 </Row>
             </div>

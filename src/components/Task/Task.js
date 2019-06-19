@@ -19,8 +19,8 @@ export default class Task extends Component {
     }
 
     metaStyle = {
-        maxHeight: '10rem',
-        overflowY:'scroll',
+        height: '10rem',
+        overflowY:'auto',
         textOverflow:'clip',
     }
 
@@ -65,7 +65,7 @@ export default class Task extends Component {
     render() {
         return (
             <React.Fragment>
-                <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={4} >
+                <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={8} xl={4}>
                     <Card
                         id='teste'
                         title={this.props.title}
