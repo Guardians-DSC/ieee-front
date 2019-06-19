@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
-import {Card, Col, Icon, Button} from 'antd';
-import { shape } from 'prop-types';
+import {Card, Col, Icon} from 'antd';
 
 export default class Member extends Component {
 
