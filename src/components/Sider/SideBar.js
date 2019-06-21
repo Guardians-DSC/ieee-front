@@ -14,8 +14,8 @@ export default class SideBar extends Component {
         super(props)
         this.state = {
             isOpen: false,
-            isEdition: false
-        }        
+            isEdition: false,
+        }
     }
 
     openModal = () => {
@@ -31,7 +31,7 @@ export default class SideBar extends Component {
                     breakpoint="lg"
                     collapsedWidth="0"
                     
-                    style={{height:'100vh', minHeight:'100vh'}}
+                    style={{height:'100vh', minHeight:'100vh', zIndex:1}}
                 >
                     
                     <div className="logo">
@@ -93,7 +93,7 @@ export default class SideBar extends Component {
                 </Sider>
                 <Layout>
                     <Content style={{  overflow: 'initial' }}>
-                        {this.props.content}    
+                        {this.props.content}
                     </Content>
                 </Layout>
             </Layout>

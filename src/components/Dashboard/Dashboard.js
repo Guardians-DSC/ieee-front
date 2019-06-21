@@ -224,7 +224,7 @@ const tasksList = tasks.map((task) =>
         title = {task.title}
         description = {task.description}
         key = {task.key}
-        id = {task.key}
+        id = {task.id}
     />
 )
 
@@ -241,6 +241,28 @@ export default class Dashboard extends Component {
     componentWillMount() {
         this.props.showType === 'task' ? this.state.info = tasksList : this.state.info = membersList;
     }
+
+    /* componentDidMount() {
+        fetch('http://localhost:8080/task')
+        .then(res => {
+            return Promise.resolve(res.json());
+        }).then(result => {
+            const tasksData = result.data
+            console.log(tasksData);
+            const tasks = tasksData.map((task, index) => 
+                <Task
+                    title={task.name}
+                    description={task.description}
+                    id={task.id}
+                    key={index}
+                />
+            );
+            this.setState({
+                info:tasks
+            })
+        })
+    } */
+
 
     rowStyle = {
         flexBasis:'50%',
