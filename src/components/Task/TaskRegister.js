@@ -22,7 +22,7 @@ class TaskRegister extends React.Component {
     }
 
     getChildren = taskTypes.map((taskType, index) => 
-            <Option style={{width:'95%'}} key={index}  >{taskType}</Option>
+            <Option style={{width:'95%'}} key={index} value={taskType} >{taskType}</Option>
         );
 
     TaskSelection = (
@@ -43,11 +43,28 @@ class TaskRegister extends React.Component {
         this.props.form.validateFields();
     }
 
+    fetchNewTask = (formData) => {
+        fetch('http://localhost:8080/task', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/JSON',
+                'Content-Type': 'application/JSON'
+            }, body: JSON.stringify({
+                name: formData.name,
+                type:  formData.type,
+                description:  formData.description,
+                date:  formData.date._d,
+                workload:  formData.workload,
+                time:  formData.time._d
+            })
+        })
+    }
+
     handleSubmit = (e) => {
-        e.preventDefault();
         this.props.form.validateFields((err, values) => {
         if (!err) {
             console.log('Informações recebidas do formulário: ', values);
+            this.fetchNewTask(values)
         }
         });
     }
@@ -66,7 +83,7 @@ class TaskRegister extends React.Component {
                     validateStatus={taskNameError ? 'error' : ''}
                     help={taskNameError || ''}
                 >
-                    {getFieldDecorator('Nome da atividade', {
+                    {getFieldDecorator('name', {
                         rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o nome da atividade!' }],
                     })(
                     <Input allowClear placeholder="Nome da atividade" />
@@ -78,7 +95,7 @@ class TaskRegister extends React.Component {
                         validateStatus={taskTypeError ? 'error' : ''}
                         help={taskTypeError || ''}
                     >
-                        {getFieldDecorator('Tipo da atividade', {
+                        {getFieldDecorator('type', {
                             rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o tipo da atividade!' }],
                     })(this.TaskSelection)
                         }
@@ -88,7 +105,7 @@ class TaskRegister extends React.Component {
                         validateStatus={workloadError ? 'error' : ''}
                         help={workloadError || ''}
                     >
-                        {getFieldDecorator('Carga Horária', {
+                        {getFieldDecorator('workload', {
                             rules: [{ required: !this.state.isEdition, message: 'Por favor, informe a carga horária!' }],
                         }
                         )(<InputNumber  min={0}  placeholder="Carga Horária" style={{width:'95%'}}/>)
@@ -99,7 +116,7 @@ class TaskRegister extends React.Component {
                         validateStatus={timeError ? 'error' : ''}
                         help={timeError || ''}
                     >
-                        {getFieldDecorator('Horário', {
+                        {getFieldDecorator('time', {
                             rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o horário' }],
                         }
                         )(<TimePicker format={timeFormat} placeholder="Horário" style={{width:'95%'}}/>)
@@ -110,15 +127,15 @@ class TaskRegister extends React.Component {
                         validateStatus={dateError ? 'error' : ''}
                         help={dateError || ''}
                     >
-                        {getFieldDecorator('Data', {
+                        {getFieldDecorator('date', {
                             rules: [{ required: !this.state.isEdition, message: 'Por favor, informe a data' }],
                         }
-                        )(<DatePicker format={dateFormat} placeholder="Data" style={{width:'95%'}}/>)
+                        )(<DatePicker value={'dateFormat'} format={dateFormat} placeholder="Data" style={{width:'95%'}}/>)
                         }
                     </FormItem>
                 </Form.Item>
                 <FormItem>
-                    {getFieldDecorator('Descrição da atividade', {
+                    {getFieldDecorator('description', {
                         rules: [{ required: false}],
                 }
                 )(<TextArea allowclear="true" rows={4} placeholder="Descrição da atividade" />)
