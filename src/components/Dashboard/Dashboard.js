@@ -4,6 +4,7 @@ import {Row} from 'antd';
 import Task from '../Task/Task';
 import Member from '../Member/Member';
 
+
 const lorem = 'Lorem ipsum dolor sit amet consectetur adipiscing elit,' +
             ' maecenas faucibus erat eleifend sapien ultrices aliquam,' +
             ' proin dictumst sociis vehicula natoque nisl.';
@@ -253,7 +254,7 @@ export default class Dashboard extends Component {
                 <Task
                     title={task.name}
                     description={task.description}
-                    id={task.id}
+                    id={task._id}
                     key={index}
                 />
             );

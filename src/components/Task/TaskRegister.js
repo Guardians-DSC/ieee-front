@@ -107,8 +107,8 @@ class TaskRegister extends React.Component {
                     >
                         {getFieldDecorator('workload', {
                             rules: [{ required: !this.state.isEdition, message: 'Por favor, informe a carga horária!' }],
-                        }
-                        )(<InputNumber  min={0}  placeholder="Carga Horária" style={{width:'95%'}}/>)
+                        }, 
+                        )(<InputNumber defaultValue='1' Option min={0}  placeholder="Carga Horária" style={{width:'95%'}}/>)
                         }
                     </FormItem>
                     <FormItem

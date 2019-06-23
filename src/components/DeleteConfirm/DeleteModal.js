@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import {Modal, Button} from 'antd';
-import Register from './TaskRegister';
+import Dele from './DeleteForm';
 
+export default class DeleteModal extends Component {
 
-export default class TaskEditModal extends Component {
 
     render() {
+
         if (!this.props.show) {
             return null;
         }
+
 
         return (
             <div>
                 <Modal
                     visible={true}
-                    title='Editar Atividade'
+                    title='Apagar Atividade'
                     onOk={this.props.onClose}
                     onCancel={this.props.onClose}
                     style={{top:'5rem'}}
@@ -24,9 +26,9 @@ export default class TaskEditModal extends Component {
                         </Button>
                     ]}
                 >
-                    <Register isEdition={this.props.isEdition}/>
+                    <Dele taskId={this.props.taskId}/>
                 </Modal>
             </div>
         )
+        }
     }
-}
