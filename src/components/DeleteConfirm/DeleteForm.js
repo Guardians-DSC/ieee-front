@@ -9,25 +9,29 @@ class DeleteForm extends Component {
 
     removeTask = () => {
         const uri = 'http://localhost:8080/task/' + this.props.taskId;
-        console.log(uri);
-        
         fetch(uri , {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/JSON',
                 'Content-Type': 'application/JSON'
             }
-        });
+        }).then(response => console.log(response));
         
     }
 
     handleSubmit = e => {
-        this.removeTask();
+        //e.preventDefault()
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Informações recebidas do formulário: ', values);
+                this.removeTask();
+            }
+        });
 
     }
 
     render() {
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
 
         return (
             <Form layout='inline' onSubmit={this.handleSubmit}>
