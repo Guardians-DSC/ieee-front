@@ -68,7 +68,7 @@ export default class Task extends Component {
     render() {
         return (
             <React.Fragment>
-                <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={8} xl={4}>
+                <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={8} >
                     <Card
                         title={this.props.title}
                         hoverable={true}
