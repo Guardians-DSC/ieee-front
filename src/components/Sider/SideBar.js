@@ -60,7 +60,12 @@ export default class SideBar extends Component {
                                 Cadastrar Atividade
                             </Menu.Item>
                             <Modal isEdition={false} show={this.state.isOpen} onClose={this.openModal}/>
-
+                            <Menu.Item
+                                key='2'
+                                onClick={null} //TODO
+                            >
+                                Listar Atividades
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key='sub2'
