@@ -239,11 +239,11 @@ export default class Dashboard extends Component {
         }
     }
 
-    // componentWillMount() {
-    //     this.props.showType === 'task' ? this.state.info = tasksList : this.state.info = membersList;
-    // }
+    componentWillMount() {
+        this.props.showType === 'task' ? this.state.info = tasksList : this.state.info = membersList;
+    }
 
-    componentDidMount() {
+    /* componentDidMount() {
         fetch('http://localhost:8080/task')
         .then(res => {
             return Promise.resolve(res.json());
@@ -262,7 +262,7 @@ export default class Dashboard extends Component {
                 info:tasks
             })
         })
-    }
+    } */
 
 
     rowStyle = {
