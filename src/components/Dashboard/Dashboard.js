@@ -273,7 +273,7 @@ export default class Dashboard extends Component {
 
     render() {
         return (
-            <div style={{ background: '#ECECEC', padding: '1rem', width:'calc(100vw - 200px)'}} >
+            <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}} >
                 <Row gutter={{xs:4, sm:16}} style={this.rowStyle}> 
                     {this.state.info}
                 </Row>
