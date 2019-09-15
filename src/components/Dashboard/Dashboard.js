@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import {Row} from 'antd';
-import Task from '../Task/Task';
+import TaskCard from '../Task/TaskCard/TaskCard';
 import Member from '../Member/Member';
 
 
@@ -221,7 +221,7 @@ const membersList = members.map((member) =>
 )
 
 const tasksList = tasks.map((task) => 
-    <Task
+    <TaskCard
         title = {task.title}
         description = {task.description}
         key = {task.key}

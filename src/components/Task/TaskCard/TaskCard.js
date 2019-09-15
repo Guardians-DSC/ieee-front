@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {Card, Col, Icon} from 'antd';
 import 'antd/dist/antd.css';
-import './task.css';
-import Modal from './TaskEditModal';
-import DeleteModal from '../DeleteConfirm/DeleteModal'
+import './taskCard.css';
+import Modal from '../TaskEditModal';
+import DeleteModal from '../../DeleteConfirm/DeleteModal'
 
 const { Meta } = Card;
 
