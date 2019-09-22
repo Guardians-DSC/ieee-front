@@ -3,6 +3,9 @@ import Dashboard from './components/Dashboard/Dashboard';
 import SideBar from './components/Sider/SideBar'
 import './App.css';
 
+
+import {TaskContext, info} from './mock/task-context';
+
 const lorem = 'Lorem ipsum dolor sit amet consectetur adipiscing elit,' +
             ' maecenas faucibus erat eleifend sapien ultrices aliquam,' +
             ' proin dictumst sociis vehicula natoque nisl.';
@@ -212,16 +215,20 @@ export default class App extends Component {
     
     constructor(props) {
         super(props);
-        this.state  = {
-            tasks: tasks
+        this.state = {
+            tasks : tasks
         }
     }
 
-    addTask(newTask) {
-        const allTasks = this.state.tasks;
-        allTasks = allTasks.push(newTask);
+    addTask(values) {
+        const newTask = {
+            'title': values.name,
+            'description' : values.description,
+            'key' : tasks.length
+        }
+        tasks.push(newTask)
         this.setState({
-            tasks: allTasks
+            tasks: tasks
         })
     }
     

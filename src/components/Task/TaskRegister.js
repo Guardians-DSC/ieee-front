@@ -64,7 +64,8 @@ class TaskRegister extends React.Component {
         this.props.form.validateFields((err, values) => {
         if (!err) {
             console.log('Informações recebidas do formulário: ', values);
-            this.fetchNewTask(values)
+            e.preventDefault()
+            this.props.addTask(values)
         }
         });
     }

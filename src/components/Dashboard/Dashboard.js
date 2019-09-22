@@ -2,63 +2,75 @@ import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import {Row} from 'antd';
 import TaskCard from '../Task/TaskCard/TaskCard';
-import Member from '../Member/Member';
+import {TaskContext} from '../../mock/task-context';
+import axios from 'axios';
+import {useState, useEffect} from 'react'
 
 
-export default class Dashboard extends Component {
+const Dashboard = () => {
+    const [tasks, setTasks] = useState();
+    const [url, setUrl] = useState('http://localhost:8080/task');
 
-    constructor(props) {
-        super(props);
-        this.state = { 
-            tasks: this.props.tasks,
-            info: null
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchTasks = await getAllTasks()
+            setTasks(fetchTasks);
+            renderCard(taska, fetchTasks)
         }
+        fetchData()
+    }, []);
+
+    const getAllTasks = async () => {
+        return await axios(url)
+                        .then(result => {
+                            return result.data.data
+                        })
     }
 
-    /* componentDidMount() {
-        fetch('http://localhost:8080/task')
-        .then(res => {
-            return Promise.resolve(res.json());
-        }).then(result => {
-            const tasksData = result.data
-            console.log(tasksData);
-            const tasks = tasksData.map((task, index) => 
-                <Task
-                    title={task.name}
-                    description={task.description}
-                    id={task._id}
-                    key={index}
-                />
-            );
-            this.setState({
-                info:tasks
-            })
-        })
-    } */
-
-
-    rowStyle = {
-        flexBasis:'50%',
-        height:'100vh',
-        overflowY:'auto'
-    }
-
-    render() {
-        const listedTasks = this.state.tasks.map((task) => (
-            <TaskCard
-                title = {task.title}
-                description = {task.description}
-                key = {task.key}
-                id = {task.id}
-            />
-        ))
+    const renderCard = (task, tasks) => {
+        if (tasks !== undefined) {
+            return (
+                tasks.map((task,index) => (
+                    <TaskCard
+                        title={task.name}
+                        description={task.description}
+                        id={task._id}
+                        key={index}
+                    />
+                )
+                ) 
+            )
+        }
         return (
-            <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}} >
-                <Row gutter={{xs:4, sm:16}} style={this.rowStyle}> 
-                    {console.log(this.props)}
-                    {listedTasks}
-                </Row>
-            </div>
+            <TaskCard
+                title={task.name}
+                description={task.description}
+                id={task.id}
+                key={1}
+            />
         )
     }
+    
+   
+   const rowStyle = {
+      flexBasis:'50%',
+      height:'100vh',
+      overflowY:'auto'
+    }
+
+    const taska = {
+        name:"asd",
+        description:"aaaaaaaaaaaaamanhã",
+        id:1
+    }
+
+    return (
+        <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}}>
+            <Row gutter={{xs:4, sm:16}} style={rowStyle}>
+                {renderCard(taska, tasks)}
+            </Row>
+        </div>
+    )
 }
+
+export default Dashboard;
