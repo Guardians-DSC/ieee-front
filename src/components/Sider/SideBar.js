@@ -3,6 +3,8 @@ import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
 import './sidebar.css';
 import Modal from '../Task/TaskRegisterModal';
+import {Link} from 'react-router-dom';
+
 
 const { SubMenu } = Menu;
 const { Sider, Content } = Layout;
@@ -64,7 +66,6 @@ export default class SideBar extends Component {
                                 key='2'
                                 onClick={null} //TODO
                             >
-                                Listar Atividades
                             </Menu.Item>
                         </SubMenu>
                         <SubMenu

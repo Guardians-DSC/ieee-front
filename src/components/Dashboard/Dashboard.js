@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import 'antd/dist/antd.css';
 import {Row} from 'antd';
 import TaskCard from '../Task/TaskCard/TaskCard';
-import {TaskContext} from '../../mock/task-context';
+import Sidebar from '../Sider/SideBar';
 import axios from 'axios';
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
 
 
 const Dashboard = () => {
@@ -54,21 +54,24 @@ const Dashboard = () => {
    
    const rowStyle = {
       flexBasis:'50%',
-      height:'100vh',
+      height:'95vh',
       overflowY:'auto'
     }
 
     const taska = {
         name:"asd",
-        description:"aaaaaaaaaaaaamanhã",
+        description:"Amanhã",
         id:1
     }
 
     return (
-        <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}}>
-            <Row gutter={{xs:4, sm:16}} style={rowStyle}>
-                {renderCard(taska, tasks)}
-            </Row>
+        <div style={{display:'flex',height:'100vh'}}>
+            <Sidebar/>
+            <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}}>
+                <Row gutter={{xs:4, sm:16}} style={rowStyle}>
+                    {renderCard(taska, tasks)}
+                </Row>
+            </div>
         </div>
     )
 }
