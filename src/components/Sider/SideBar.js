@@ -59,13 +59,17 @@ export default class SideBar extends Component {
                                 key="1"
                                 onClick={this.openModal}
                             >
-                                Cadastrar Atividade
+                                <Link to="/novo">
+                                    Cadastrar Atividade
+                                </Link>
                             </Menu.Item>
-                            <Modal addTask={this.props.addTask} isEdition={false} show={this.state.isOpen} onClose={this.openModal}/>
                             <Menu.Item
                                 key='2'
                                 onClick={null} //TODO
                             >
+                                <Link to="/">
+                                    Listar Atividades
+                                </Link>
                             </Menu.Item>
                         </SubMenu>
                         <SubMenu
