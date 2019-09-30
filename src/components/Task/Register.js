@@ -1,14 +1,17 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import {useState, useEffect} from 'react';
-import SideBar from '../Sider/SideBar';
 import axios from 'axios';
+import validator from 'validator';
 
+import SideBar from '../Sider/SideBar';
+
+import {useState, useEffect} from 'react';
 import { Row, Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
+import 'antd/dist/antd.css';
 
 const InputGroup = Input.Group;
 const { TextArea } = Input;
 const { Option } = Select;
+const { ignore_whitespace } = validator;
 
 const taskTypes = ['Reunião', 'Confraternização', 'Atividade', 'Técnica', 'Evento', 'Palestra', 'Workshop' , 'Competição'];
 const timeFormat = 'HH:mm';
@@ -86,7 +89,8 @@ const Register = props => {
     }
 
     const handleSubmit = async () => {
-        return await axios.post(url, {
+        
+        /* return await axios.post(url, {
             name: name,
             type: type,
             workload: workload,
@@ -99,9 +103,28 @@ const Register = props => {
         })
         .catch(function (err) {
             console.log(err)
-        })
+        }) */
     }
-    
+
+    const validateFields = () => {
+        const trimedName = validator.trim(name, ' ');
+        const isNameValid = validator.isEmpty(trimedName, {ignore_whitespace});
+
+        const trimedType = validator.trim(type, ' ');
+        const isTypeValid = validator.isEmpty(trimedType, {ignore_whitespace});
+
+        const trimedWorkload = validator.trim(workload, ' ');
+        const isWorkloadEmpty = validator.isEmpty( trimedWorkload, {ignore_whitespace});
+        const isWorkloadNumeric = validator.isNumeric(trimedWorkload, {no_symbols: true});
+
+        const trimedTime = validator.trim(type, ' ');
+        const isTimeValid = validator.isEmpty(trimedTime, {ignore_whitespace});
+
+        const trimedDate = validator.trim(type, ' ');
+        const isDateValid = validator.isEmpty(trimedDate, {ignore_whitespace});
+
+        return isNameValid && isTypeValid && isWorkloadEmpty && isWorkloadNumeric && isTimeValid && isDateValid;
+    }
 
     return(
         <div style={style.container} >
