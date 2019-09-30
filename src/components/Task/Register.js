@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import {useState, useEffect} from 'react';
 import SideBar from '../Sider/SideBar';
+import axios from 'axios';
 
 import { Row, Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
 
@@ -13,26 +13,6 @@ const { Option } = Select;
 const taskTypes = ['Reunião', 'Confraternização', 'Atividade', 'Técnica', 'Evento', 'Palestra', 'Workshop' , 'Competição'];
 const timeFormat = 'HH:mm';
 const dateFormat = 'DD-MM-YYYY';
-
-
-const TaskOptions = taskTypes.map((taskType, index) => (
-        <Option value={taskType} key={index}> {taskType} </Option>
-    )
-);
-
-const TaskSelection = () => {
-    return (<Select
-        showSearch
-        placeholder="Selecione o tipe de Atividade"
-        style={{width: '100%'}}
-        allowClear
-        showArrow={false}
-        size="large"
-    >
-        {TaskOptions}
-    </Select>)
-}
-
 
 const style = {
     container: {
@@ -68,7 +48,61 @@ const style = {
     }
 }
 
+const canClick = () => {
+    return true
+}
+
 const Register = props => {
+    const [name, setName] = useState('');
+    const [type, setType] = useState();
+    const [workload, setWorkload] = useState('');
+    const [time, setTime] = useState('');
+    const [date, setDate] = useState('');
+    const [description, setDescription] = useState('');
+    const [url, setUrl] = useState('http://localhost:8080/task')
+
+    function clicou() {
+        console.log(name, type, workload, time, date, description);
+    }
+
+    const TaskOptions = taskTypes.map((taskType, index) => (
+        <Option value={taskType} key={index}> {taskType} </Option>
+        )
+    );
+
+    const TaskSelection = () => {
+        return (<Select
+            showSearch
+            placeholder="Selecione o tipe de Atividade"
+            style={{width: '100%'}}
+            allowClear
+            showArrow={false}
+            size="large"
+            value={type}
+            onChange={event=>setType(event)}
+        >
+            {TaskOptions}
+        </Select>)
+    }
+
+    const handleSubmit = async () => {
+        return await axios.post(url, {
+            name: name,
+            type: type,
+            workload: workload,
+            date: date,
+            time: time,
+            description: description
+        })
+        .then(function (response) {
+            console.log(response)
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+    }
+    
+
     return(
         <div style={style.container} >
             <SideBar/>
@@ -82,7 +116,7 @@ const Register = props => {
                 <InputGroup >
                     <Row >
                         <Col span={13} offset={4} style={style.item}>
-                            <Input size="large" placeholder="Nome da Nova Atividade" allowClear />
+                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Nome da Nova Atividade" allowClear />
                         </Col>
                     </Row>
                 </InputGroup>
@@ -92,37 +126,34 @@ const Register = props => {
                             <TaskSelection />
                         </Col>
                         <Col span={6} offset={1} style={style.item}>
-                            <InputNumber size="large" Option min={1} placeholder="Carga Horária" style={{width:'100%'}}/>
+                            <InputNumber onChange={value=>setWorkload(value)} size="large" Option min={1} placeholder="Carga Horária" style={{width:'100%'}}/>
                         </Col>
                     </Row>
                 </InputGroup>
                 <InputGroup size="large">
                     <Row>
                         <Col span={6} offset={4} style={style.item}>
-                            <DatePicker  format={dateFormat} placeholder="Data da Atividade" style={{width:'100%'}} />
+                            <DatePicker onChange={value=>setDate(value._d)} format={dateFormat} placeholder="Data da Atividade" style={{width:'100%'}} />
                         </Col>
                         <Col span={6} offset={1} style={style.item}>
-                            <TimePicker size="large" format={timeFormat} placeholder="Hora" style={{width:'100%'}}/>
+                            <TimePicker onChange={value=>setTime(value._d)} size="large" format={timeFormat} placeholder="Hora" style={{width:'100%'}}/>
                         </Col>
                     </Row>
                 </InputGroup>
                 <InputGroup size="large" >
                     <Row >
                         <Col span={13} offset={4} style={style.item}>
-                            <TextArea autosize={{minRows:4, maxRows:6}} placeholder="Descrição da Atividade" />
+                            <TextArea onChange={event=>setDescription(event.target.value)} autosize={{minRows:4, maxRows:6}} placeholder="Descrição da Atividade" />
                         </Col>
                     </Row>
                 </InputGroup>
                 <InputGroup size="large" >
                     <Row >
                         <Col span={6} offset={4} style={style.item}>
-                            <Button type="primary" size="large" >Cadastrar</Button>
+                            <Button type="primary" size="large" onClick={handleSubmit}>Cadastrar</Button>
                         </Col>
                     </Row>
                 </InputGroup>
-                
-                
-
             </div>
             
         </div>
