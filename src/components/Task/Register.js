@@ -1,17 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-import validator from 'validator';
+import fieldsValidator from '../../services/fieldsValidator';
 
 import SideBar from '../Sider/SideBar';
 
 import {useState, useEffect} from 'react';
 import { Row, Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
 import 'antd/dist/antd.css';
+import { validate } from '@babel/types';
+
 
 const InputGroup = Input.Group;
 const { TextArea } = Input;
 const { Option } = Select;
-const { ignore_whitespace } = validator;
 
 const taskTypes = ['Reunião', 'Confraternização', 'Atividade', 'Técnica', 'Evento', 'Palestra', 'Workshop' , 'Competição'];
 const timeFormat = 'HH:mm';
@@ -51,30 +52,24 @@ const style = {
     }
 }
 
-const canClick = () => {
-    return true
-}
 
 const Register = props => {
     const [name, setName] = useState('');
     const [type, setType] = useState();
-    const [workload, setWorkload] = useState('');
-    const [time, setTime] = useState('');
-    const [date, setDate] = useState('');
+    const [workload, setWorkload] = useState();
+    const [time, setTime] = useState(undefined);
+    const [date, setDate] = useState(undefined);
     const [description, setDescription] = useState('');
     const [url, setUrl] = useState('http://localhost:8080/task')
-
-    function clicou() {
-        console.log(name, type, workload, time, date, description);
-    }
-
-    const TaskOptions = taskTypes.map((taskType, index) => (
-        <Option value={taskType} key={index}> {taskType} </Option>
+    
+    const TaskOptions = taskTypes.map(
+        (taskType, index) => (
+            <Option value={taskType} key={index}> {taskType} </Option>
         )
     );
-
-    const TaskSelection = () => {
-        return (<Select
+        
+        const TaskSelection = () => {
+            return (<Select
             showSearch
             placeholder="Selecione o tipe de Atividade"
             style={{width: '100%'}}
@@ -87,8 +82,11 @@ const Register = props => {
             {TaskOptions}
         </Select>)
     }
-
+    
     const handleSubmit = async () => {
+        
+        console.log(validateFields())
+
         
         /* return await axios.post(url, {
             name: name,
@@ -105,26 +103,42 @@ const Register = props => {
             console.log(err)
         }) */
     }
-
+    
     const validateFields = () => {
-        const trimedName = validator.trim(name, ' ');
-        const isNameValid = validator.isEmpty(trimedName, {ignore_whitespace});
+        const isNameValid = validateName(name);
+        const isTypeValid = validateName(type);
+        const isWorkloadValid = validateUndefined(workload);
+        const isDateValid = validateUndefined(date);
+        const isTimeValid = validateUndefined(time);
+        
+        return (
+            isNameValid &&
+            isTypeValid &&
+            isWorkloadValid &&
+            isDateValid &&
+            isTimeValid
+            ) 
+        }
 
-        const trimedType = validator.trim(type, ' ');
-        const isTypeValid = validator.isEmpty(trimedType, {ignore_whitespace});
-
-        const trimedWorkload = validator.trim(workload, ' ');
-        const isWorkloadEmpty = validator.isEmpty( trimedWorkload, {ignore_whitespace});
-        const isWorkloadNumeric = validator.isNumeric(trimedWorkload, {no_symbols: true});
-
-        const trimedTime = validator.trim(type, ' ');
-        const isTimeValid = validator.isEmpty(trimedTime, {ignore_whitespace});
-
-        const trimedDate = validator.trim(type, ' ');
-        const isDateValid = validator.isEmpty(trimedDate, {ignore_whitespace});
-
-        return isNameValid && isTypeValid && isWorkloadEmpty && isWorkloadNumeric && isTimeValid && isDateValid;
+        const validateUndefined = (field) => {
+            if (fieldsValidator.isUndefined(field)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        
+        
+        const validateName = (field) => {
+            if (fieldsValidator.isEmpty(field)) {
+                console.log("Field is empty");
+                return false;
+            } else {
+                console.log("Field is  valid", field);
+                return true
+        }
     }
+    
 
     return(
         <div style={style.container} >
@@ -156,10 +170,10 @@ const Register = props => {
                 <InputGroup size="large">
                     <Row>
                         <Col span={6} offset={4} style={style.item}>
-                            <DatePicker onChange={value=>setDate(value._d)} format={dateFormat} placeholder="Data da Atividade" style={{width:'100%'}} />
+                            <DatePicker onChange={value=>setDate(value)} format={dateFormat} placeholder="Data da Atividade" style={{width:'100%'}} />
                         </Col>
                         <Col span={6} offset={1} style={style.item}>
-                            <TimePicker onChange={value=>setTime(value._d)} size="large" format={timeFormat} placeholder="Hora" style={{width:'100%'}}/>
+                            <TimePicker onChange={value=>setTime(value)} size="large" format={timeFormat} placeholder="Hora" style={{width:'100%'}}/>
                         </Col>
                     </Row>
                 </InputGroup>
@@ -173,7 +187,7 @@ const Register = props => {
                 <InputGroup size="large" >
                     <Row >
                         <Col span={6} offset={4} style={style.item}>
-                            <Button type="primary" size="large" onClick={handleSubmit}>Cadastrar</Button>
+                            <Button disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit}>Cadastrar</Button>
                         </Col>
                     </Row>
                 </InputGroup>
