@@ -146,41 +146,30 @@ const Register = props => {
             <div style={style.input}>
                 <Row>
                     <Col span={13} offset={4} style={style.inputHeader}>
-                        cadastro de atividade
+                        cadastro de membro
                     </Col>
                 </Row>
 
                 <InputGroup >
                     <Row >
                         <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Nome da Nova Atividade" allowClear />
+                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Nome do Novo Membro" allowClear />
                         </Col>
                     </Row>
                 </InputGroup>
-                <InputGroup>
-                    <Row>
-                        <Col span={6} offset={4} style={style.item}>
-                            <TaskSelection />
-                        </Col>
-                        <Col span={6} offset={1} style={style.item}>
-                            <InputNumber onChange={value=>setWorkload(value)} size="large" Option min={1} placeholder="Carga Horária" style={{width:'100%'}}/>
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup size="large">
-                    <Row>
-                        <Col span={6} offset={4} style={style.item}>
-                            <DatePicker onChange={value=>setDate(value)} format={dateFormat} placeholder="Data da Atividade" style={{width:'100%'}} />
-                        </Col>
-                        <Col span={6} offset={1} style={style.item}>
-                            <TimePicker onChange={value=>setTime(value)} size="large" format={timeFormat} placeholder="Hora" style={{width:'100%'}}/>
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup size="large" >
+ 
+                <InputGroup >
                     <Row >
                         <Col span={13} offset={4} style={style.item}>
-                            <TextArea onChange={event=>setDescription(event.target.value)} autosize={{minRows:4, maxRows:6}} placeholder="Descrição da Atividade" />
+                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Email" allowClear />
+                        </Col>
+                    </Row>
+                </InputGroup>
+ 
+                <InputGroup >
+                    <Row >
+                        <Col span={13} offset={4} style={style.item}>
+                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Senha" allowClear />
                         </Col>
                     </Row>
                 </InputGroup>
@@ -191,7 +180,7 @@ const Register = props => {
                         </Col>
                     </Row>
                 </InputGroup>
-            </div>
+             </div>
             
         </div>
     )

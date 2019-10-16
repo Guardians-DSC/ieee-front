@@ -5,10 +5,11 @@ import './sidebar.css';
 import Modal from '../Task/TaskRegisterModal';
 import {Link} from 'react-router-dom';
 
-
 const { SubMenu } = Menu;
 const { Sider, Content } = Layout;
 const imgSrc = "https://i1.wp.com/ieeer8.org/wp-content/uploads/2016/04/ieeelogo_512_transparent.png?fit=512%2C512&ssl=1";
+
+
 
 export default class SideBar extends Component {
 
@@ -29,24 +30,13 @@ export default class SideBar extends Component {
     render() {
         return (
             <Layout>
-                <Sider
-                    breakpoint="lg"
-                    collapsedWidth="0"
-                    
-                    style={{height:'100vh', minHeight:'100vh', zIndex:1}}
-                >
-                    
+                <Sider breakpoint="lg" collapsedWidth="0" style={{height:'100vh', minHeight:'100vh', zIndex:1}}>
                     <div className="logo">
                         <img className="i3eIcon" src={imgSrc} alt="logo ieee"/>
                         <h3 className="i3eTitle">IEEE Task Manager</h3>
                     </div>
-                    <Menu
-                        theme='dark'
-                        mode='inline'
-                    >
-                        <SubMenu
-                            key='sub1'
-                            title = {
+                    <Menu theme='dark' mode='inline'>
+                        <SubMenu key='sub1' title = {
                                 <span>
                                     <Icon type="container" />
                                     <span>
@@ -55,23 +45,18 @@ export default class SideBar extends Component {
                                 </span>
                             }
                         >
-                            <Menu.Item 
-                                key="1"
-                                onClick={this.openModal}
-                            >
-                                <Link to="/novo">
+                            <Menu.Item key="1" onClick={this.openModal}>
+                                <Link to="/novaAtividade">
                                     Cadastrar Atividade
                                 </Link>
                             </Menu.Item>
-                            <Menu.Item
-                                key='2'
-                                onClick={null} //TODO
-                            >
+                            <Menu.Item key='2' onClick={null}>
                                 <Link to="/">
                                     Listar Atividades
                                 </Link>
                             </Menu.Item>
                         </SubMenu>
+
                         <SubMenu
                             key='sub2'
                             title = {
@@ -83,7 +68,11 @@ export default class SideBar extends Component {
                                 </span>
                             }
                         >
-                            <Menu.Item key="4">Cadastrar Membro</Menu.Item>
+                            <Menu.Item key="4" onClick={this.openModal}>
+                                <Link to="/novoMembro">
+                                    Cadastrar Membro
+                                </Link>
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu
                             key='sub3'

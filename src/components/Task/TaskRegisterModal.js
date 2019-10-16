@@ -3,7 +3,6 @@ import {Modal, Button} from 'antd';
 import PropTypes from 'prop-types';
 import Register from './TaskRegister';
 
-
 class TaskRegisterModal extends Component  {
 
     render() {
