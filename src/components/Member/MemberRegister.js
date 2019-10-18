@@ -1,22 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import fieldsValidator from '../../services/fieldsValidator';
+import {useState, useEffect} from 'react';
+import { Row, Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
+import { validate } from '@babel/types';
+import 'antd/dist/antd.css';
 
 import SideBar from '../Sider/SideBar';
 
-import {useState, useEffect} from 'react';
-import { Row, Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
-import 'antd/dist/antd.css';
-import { validate } from '@babel/types';
-
-
 const InputGroup = Input.Group;
 const { TextArea } = Input;
-const { Option } = Select;
-
-const taskTypes = ['Reunião', 'Confraternização', 'Atividade', 'Técnica', 'Evento', 'Palestra', 'Workshop' , 'Competição'];
-const timeFormat = 'HH:mm';
-const dateFormat = 'DD-MM-YYYY';
 
 const style = {
     container: {
@@ -52,36 +45,10 @@ const style = {
     }
 }
 
-
 const Register = props => {
     const [name, setName] = useState('');
-    const [type, setType] = useState();
-    const [workload, setWorkload] = useState();
-    const [time, setTime] = useState(undefined);
-    const [date, setDate] = useState(undefined);
-    const [description, setDescription] = useState('');
-    const [url, setUrl] = useState('http://localhost:8080/task')
-    
-    const TaskOptions = taskTypes.map(
-        (taskType, index) => (
-            <Option value={taskType} key={index}> {taskType} </Option>
-        )
-    );
-        
-        const TaskSelection = () => {
-            return (<Select
-            showSearch
-            placeholder="Selecione o tipe de Atividade"
-            style={{width: '100%'}}
-            allowClear
-            showArrow={false}
-            size="large"
-            value={type}
-            onChange={event=>setType(event)}
-        >
-            {TaskOptions}
-        </Select>)
-    }
+    const [email, setEmail] = useState('');   
+    const [senha, setSenha] = useState('');   
     
     const handleSubmit = async () => {
         
@@ -103,42 +70,49 @@ const Register = props => {
             console.log(err)
         }) */
     }
-    
+
     const validateFields = () => {
         const isNameValid = validateName(name);
-        const isTypeValid = validateName(type);
-        const isWorkloadValid = validateUndefined(workload);
-        const isDateValid = validateUndefined(date);
-        const isTimeValid = validateUndefined(time);
+        const isEmailValid = validateEmail(email);
+        const isSenhaValid = validateUndefined(senha);
         
         return (
             isNameValid &&
-            isTypeValid &&
-            isWorkloadValid &&
-            isDateValid &&
-            isTimeValid
+            isEmailValid &&
+            isSenhaValid
             ) 
         }
 
-        const validateUndefined = (field) => {
-            if (fieldsValidator.isUndefined(field)) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-        
-        
-        const validateName = (field) => {
-            if (fieldsValidator.isEmpty(field)) {
-                console.log("Field is empty");
-                return false;
-            } else {
-                console.log("Field is  valid", field);
-                return true
+    const validateUndefined = (field) => {
+        if (fieldsValidator.isUndefined(field)) {
+            return false;
+        } else {
+            return true;
         }
     }
     
+    const validateName = (field) => {
+        if (fieldsValidator.isEmpty(field)) {
+            console.log("Field is empty");
+            return false;
+        } else {
+            console.log("Field is valid", field);
+            return true
+        }
+    }
+
+    const validateEmail = (field) => {
+        if (fieldsValidator.isEmpty(field)) {
+            console.log("Field is empty");
+            return false;
+        } if (fieldsValidator.isNumeric(field)) {
+            console.log("Email is invalid");
+            return false;
+        } else {
+            console.log("Field is valid", field);
+            return true
+        }
+    }
 
     return(
         <div style={style.container} >
@@ -161,7 +135,7 @@ const Register = props => {
                 <InputGroup >
                     <Row >
                         <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Email" allowClear />
+                            <Input onChange={event => setEmail(event.target.value)} size="large" placeholder="Email" allowClear />
                         </Col>
                     </Row>
                 </InputGroup>
@@ -169,7 +143,7 @@ const Register = props => {
                 <InputGroup >
                     <Row >
                         <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Senha" allowClear />
+                            <Input onChange={event => setSenha(event.target.value)} size="large" placeholder="Senha" allowClear />
                         </Col>
                     </Row>
                 </InputGroup>

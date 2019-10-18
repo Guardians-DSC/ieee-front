@@ -120,22 +120,22 @@ const Register = props => {
             ) 
         }
 
-        const validateUndefined = (field) => {
-            if (fieldsValidator.isUndefined(field)) {
-                return false;
-            } else {
-                return true;
-            }
+    const validateUndefined = (field) => {
+        if (fieldsValidator.isUndefined(field)) {
+            return false;
+        } else {
+            return true;
         }
-        
-        
-        const validateName = (field) => {
-            if (fieldsValidator.isEmpty(field)) {
-                console.log("Field is empty");
-                return false;
-            } else {
-                console.log("Field is  valid", field);
-                return true
+    }
+    
+    
+    const validateName = (field) => {
+        if (fieldsValidator.isEmpty(field)) {
+            console.log("Field is empty");
+            return false;
+        } else {
+            console.log("Field is  valid", field);
+            return true
         }
     }
     
