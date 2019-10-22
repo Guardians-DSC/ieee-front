@@ -1,32 +1,25 @@
-import React, { Component } from 'react'
-import {Modal, Button} from 'antd';
-import Register from './TaskRegister';
+import React, {useEffect} from 'react'
+import {Modal} from 'antd';
+import TaskRegister from './TaskRegister';
+import axios from 'axios';
 
 
-export default class TaskEditModal extends Component {
+const url = 'http://localhost:8080/task'
+const TaskEditModal = (props) => {
+    const {show, onClose, isEdition, id, title, description} = props;
 
-    render() {
-        if (!this.props.show) {
-            return null;
-        }
+    return show && (
+        <div>
+            <Modal
+                visible={true}
+                title='Editar Atividade'
+                onOk={onClose}
+                onCancel={onClose}
+            >
+                <TaskRegister isEdition id title description />
+            </Modal>
+        </div>
+    )
+};
 
-        return (
-            <div>
-                <Modal
-                    visible={true}
-                    title='Editar Atividade'
-                    onOk={this.props.onClose}
-                    onCancel={this.props.onClose}
-                    style={{top:'5rem'}}
-                    footer={[
-                        <Button type='submit' onClick={this.props.onClose}>
-                            Voltar
-                        </Button>
-                    ]}
-                >
-                    <Register isEdition={this.props.isEdition}/>
-                </Modal>
-            </div>
-        )
-    }
-}
+export default TaskEditModal;

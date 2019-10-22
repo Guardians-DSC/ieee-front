@@ -22,9 +22,9 @@ const Dashboard = () => {
 
     const getAllTasks = async () => {
         return await axios(url)
-                        .then(result => {
-                            return result.data.data
-                        })
+            .then(result => {
+                return result.data.data
+            })
     }
 
     const renderCard = (task, tasks) => {

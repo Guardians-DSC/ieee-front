@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Modal, Button} from 'antd';
-import Dele from './DeleteForm';
+import DeleteForm from './DeleteForm';
 
 export default class DeleteModal extends Component {
 
@@ -26,7 +26,7 @@ export default class DeleteModal extends Component {
                         </Button>
                     ]}
                 >
-                    <Dele taskId={this.props.taskId}/>
+                    <DeleteForm taskId={this.props.taskId}/>
                 </Modal>
             </div>
         )

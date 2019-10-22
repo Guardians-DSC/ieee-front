@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Card, Col, Icon} from 'antd';
 import 'antd/dist/antd.css';
 import './taskCard.css';
-import Modal from '../TaskEditModal';
+import TaskEditModal from '../TaskEditModal';
 import DeleteModal from '../../DeleteConfirm/DeleteModal'
 
 const { Meta } = Card;
@@ -58,42 +58,52 @@ export default class Task extends Component {
     openDeleteModal = () => {
         this.setState({
             isDeleteOpen: !this.state.isDeleteOpen
-        })
-        
+        })    
     }
-    
-    
-    
 
-    render() {
+    
+    render () {
         return (
             <React.Fragment>
                 <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={8} lg={8} xl={4}>
                     <Card
                         title={this.props.title}
                         hoverable={true}
-                        actions={
-                            [<Icon
+                        actions={[
+                            <Icon
                                 key='1' 
-                                type="edit"
+                                type='edit'
                                 onClick={this.openRegisterModal}
                                 theme='twoTone'
                                 style={this.iconStyle}
                             /> ,
-                            <Icon 
+                            <Icon
                                 key='2'
+                                type='copy'
+                                onClick={this.openDeleteModal}
+                                theme='twoTone'
+                                style={this.iconStyle}
+                            />,
+                            <Icon
+                                key='3'
                                 type='delete'
                                 onClick={this.openDeleteModal}
                                 theme='twoTone'
                                 twoToneColor='#eb2f96'
                                 style={this.iconStyle}
                             />
-                            ]
-                        }
+                        ]}
                         style={this.cardStyle}
                     >
                         <DeleteModal show={this.state.isDeleteOpen} onClose={this.openDeleteModal} taskId={this.props.id}/>
-                        <Modal isEdition={this.state.isEdition} show={this.state.isRegisterOpen} onClose={this.openRegisterModal}/>
+                        <TaskEditModal 
+                            id={this.props.id} 
+                            title={this.props.name}
+                            description={this.props.description}
+                            isEdition={this.state.isEdition} 
+                            show={this.state.isRegisterOpen} 
+                            onClose={this.openRegisterModal}
+                        />
                         <Meta style={this.metaStyle} description={this.props.description}/>
                         
                     </Card>

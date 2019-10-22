@@ -48,7 +48,9 @@ const style = {
 const Register = props => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');   
-    const [senha, setSenha] = useState('');   
+    const [senha, setSenha] = useState('');
+    const [url, setUrl] = useState('http://localhost:8080/user')
+   
     
     const handleSubmit = async () => {
         
