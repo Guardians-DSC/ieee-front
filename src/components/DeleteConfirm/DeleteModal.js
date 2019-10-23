@@ -11,7 +11,6 @@ export default class DeleteModal extends Component {
             return null;
         }
 
-
         return (
             <div>
                 <Modal
@@ -20,11 +19,11 @@ export default class DeleteModal extends Component {
                     onOk={this.props.onClose}
                     onCancel={this.props.onClose}
                     style={{top:'5rem'}}
-                    footer={[
-                        <Button type='submit' onClick={this.props.onClose}>
+                    footer={
+                        <Button onClick={this.props.onClose}>
                             Voltar
                         </Button>
-                    ]}
+                    }
                 >
                     <DeleteForm taskId={this.props.taskId}/>
                 </Modal>

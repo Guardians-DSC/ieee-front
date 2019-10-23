@@ -6,7 +6,6 @@ import Sidebar from '../Sider/SideBar';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 
-
 const Dashboard = () => {
     const [tasks, setTasks] = useState();
     const [url, setUrl] = useState('http://localhost:8080/task');

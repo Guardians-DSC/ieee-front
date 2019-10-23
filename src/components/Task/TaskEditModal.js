@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const url = 'http://localhost:8080/task'
 const TaskEditModal = (props) => {
-    const {show, onClose, isEdition, id, title, description} = props;
+const {show, onClose, isEdition, id, title, description} = props;
 
     return show && (
         <div>

@@ -80,7 +80,6 @@ export default class Task extends Component {
                             <Icon
                                 key='2'
                                 type='copy'
-                                onClick={this.openDeleteModal}
                                 theme='twoTone'
                                 style={this.iconStyle}
                             />,
