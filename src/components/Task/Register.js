@@ -1,18 +1,22 @@
-import { Button, Form,  Input, InputNumber, DatePicker, TimePicker, Select} from 'antd';
-import * as React from 'react';
+import React from 'react';
+import axios from 'axios';
+import fieldsValidator from '../../services/fieldsValidator';
 
 import SideBar from '../Sider/SideBar';
 
+import {useState, useEffect} from 'react';
+import { Row, Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
+import 'antd/dist/antd.css';
+import { validate } from '@babel/types';
+
+
+const InputGroup = Input.Group;
+const { TextArea } = Input;
 const { Option } = Select;
-const FormItem = Form.Item;
-const {TextArea} = Input;
+
+const taskTypes = ['Reunião', 'Confraternização', 'Atividade', 'Técnica', 'Evento', 'Palestra', 'Workshop' , 'Competição'];
 const timeFormat = 'HH:mm';
 const dateFormat = 'DD-MM-YYYY';
-const taskTypes = ['Reunião', 'Confraternização', 'Atividade', 'Técnica', 'Evento', 'Palestra', 'Workshop' , 'Competição'];
-
-function hasErrors(fieldsError: any) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
 
 const style = {
     container: {
@@ -49,154 +53,166 @@ const style = {
 }
 
 
-class TaskRegister extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEdition:this.props.isEdition
-        }
-    }
-
-    getChildren = taskTypes.map((taskType, index) => 
-            <Option style={{width:'95%'}} key={index} value={taskType} >{taskType}</Option>
-        );
-
-    TaskSelection = (
-        <Select
-            showSearch
-            showArrow={false}
-            placeholder='Tipo da Atividade'
-            required={true}
-            allowClear
-            style={{width:'95%'}}
-            optionFilterProp="children"
-        >
-            {this.getChildren}
-        </Select>
+const Register = props => {
+    const [name, setName] = useState('');
+    const [type, setType] = useState();
+    const [workload, setWorkload] = useState();
+    const [time, setTime] = useState(undefined);
+    const [date, setDate] = useState(undefined);
+    const [description, setDescription] = useState('');
+    const [url, setUrl] = useState('http://localhost:8080/task')
+    
+    const TaskOptions = taskTypes.map(
+        (taskType, index) => (
+            <Option value={taskType} key={index}> {taskType} </Option>
+        )
     );
-
-    componentDidMount() {
-        this.props.form.validateFields();
+        
+        const TaskSelection = () => {
+            return (<Select
+            showSearch
+            placeholder="Selecione o tipe de Atividade"
+            style={{width: '100%'}}
+            allowClear
+            showArrow={false}
+            size="large"
+            value={type}
+            onChange={event=>setType(event)}
+        >
+            {TaskOptions}
+        </Select>)
     }
-
-    fetchNewTask = (formData) => {
-        fetch('http://localhost:8080/task', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/JSON',
-                'Content-Type': 'application/JSON'
-            }, body: JSON.stringify({
-                name: formData.name,
-                type:  formData.type,
-                description:  formData.description,
-                date:  formData.date._d,
-                workload:  formData.workload,
-                time:  formData.time._d
-            })
-        })
+    
+    const handleSubmit = async () => {
+        return axios.post(url, {
+            name: name,
+            type: type,
+            workload: workload,
+            date: date,
+            time: time,
+            description: description
+        }).then(window.location.reload())
+        
+        // console.log(validateFields())
+        // console.log('app rodando!');
+        // fetch(URL)
+        // .then(response => response.json())
+        // .then(dado => {
+        //     console.log(dado);
+        //     dado.forEach(disciplina => {
+        //         let $p = document.createElement("p");
+        //         $disciplinas.appendChild($p);
+        //         $p.innerText = "Disciplina: " + disciplina.nome;
+        //     });
+        //     return axios.post(url, {
+        //         name: name,
+        //         type: type,
+        //         workload: workload,
+        //         date: date,
+        //         time: time,
+        //         description: description
+        //     })
+        //     .then(function (response) {
+        //         console.log(response)
+        //     })
+        //     .catch(function (err) {
+        //         console.log(err)
+        //     }) 
     }
-
-    handleSubmit = (e) => {
-        this.props.form.validateFields((err, values) => {
-        if (!err) {
-            console.log('Informações recebidas do formulário: ', values);
-            e.preventDefault()
-            this.props.addTask(values)
-        }
-        });
-    }
-
-
-    render() {
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-        const taskNameError = isFieldTouched('Nome da atividade') && getFieldError('Nome da atividade');
-        const taskTypeError = isFieldTouched('Tipo da atividade') && getFieldError('Tipo da atividade');
-        const workloadError = isFieldTouched('Carga Horária') && getFieldError('Carga Horária');
-        const dateError = isFieldTouched('Data') && getFieldError('Data');
-        const timeError = isFieldTouched('Horário') && getFieldError('Horário');
-
+    
+    const validateFields = () => {
+        const isNameValid = validateNotEmpty(name);
+        const isTypeValid = validateNotEmpty(type);
+        const isWorkloadValid = validateUndefined(workload);
+        const isDateValid = validateUndefined(date);
+        const isTimeValid = validateUndefined(time);
+        const isDescriptionValid = validateNotEmpty(description);
+        
         return (
-            <div style={style.container} >
-                <SideBar/>
-                <div style={style.input}> 
-                    <Form layout="vertical" onSubmit={this.handleSubmit}>
-                        <FormItem
-                            validateStatus={taskNameError ? 'error' : ''}
-                            help={taskNameError || ''}
-                            >
-                            {getFieldDecorator('name', {
-                                rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o nome da atividade!' }],
-                            })(
-                                <Input allowClear placeholder="Nome da atividade" />
-                                )}
-                        </FormItem>
-                        <Form.Item style={{marginBottom:0}}>
-                            <FormItem
-                                style={{ display: 'inline-block', width:'50%'}}
-                                validateStatus={taskTypeError ? 'error' : ''}
-                                help={taskTypeError || ''}
-                                >
-                                {getFieldDecorator('type', {
-                                    rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o tipo da atividade!' }],
-                            })(this.TaskSelection)
-                        }
-                            </FormItem>
-                            <FormItem
-                                style={{ display: 'inline-block', width:'50%'}}
-                                validateStatus={workloadError ? 'error' : ''}
-                                help={workloadError || ''}
-                                >
-                                {getFieldDecorator('workload', {
-                                    rules: [{ required: !this.state.isEdition, message: 'Por favor, informe a carga horária!' }],
-                                }, 
-                                )(<InputNumber defaultValue='1' Option min={0}  placeholder="Carga Horária" style={{width:'95%'}}/>)
-                            }
-                            </FormItem>
-                            <FormItem
-                                style={{ display: 'inline-block', width:'50%'}}
-                                validateStatus={timeError ? 'error' : ''}
-                                help={timeError || ''}
-                                >
-                                {getFieldDecorator('time', {
-                                    rules: [{ required: !this.state.isEdition, message: 'Por favor, informe o horário' }],
-                                }
-                                )(<TimePicker format={timeFormat} placeholder="Horário" style={{width:'95%'}}/>)
-                            }
-                            </FormItem>
-                            <FormItem
-                                style={{ display: 'inline-block', width:'50%'}}
-                                validateStatus={dateError ? 'error' : ''}
-                                help={dateError || ''}
-                                >
-                                {getFieldDecorator('date', {
-                                    rules: [{ required: !this.state.isEdition, message: 'Por favor, informe a data' }],
-                                }
-                                )(<DatePicker value={'dateFormat'} format={dateFormat} placeholder="Data" style={{width:'95%'}}/>)
-                            }
-                            </FormItem>
-                        </Form.Item>
-                        <FormItem>
-                            {getFieldDecorator('description', {
-                                rules: [{ required: false}],
-                            }
-                            )(<TextArea allowclear="true" rows={4} placeholder="Descrição da atividade" />)
-                        }
-                        </FormItem>
-                        <FormItem>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            disabled={hasErrors(getFieldsError())}
-                            >
-                            Cadastrar Atividade
-                        </Button>
-                        </FormItem>
-                    </Form>
-                </div>
-            </div>
-        );
+            isNameValid &&
+            isTypeValid &&
+            isWorkloadValid &&
+            isDateValid &&
+            isTimeValid &&
+            isDescriptionValid
+            ) 
+        }
+
+    const validateUndefined = (field) => {
+        if (fieldsValidator.isUndefined(field)) {
+            return false;
+        } else {
+            return true;
+        }
     }
+    
+    
+    const validateNotEmpty = (field) => {
+        if (fieldsValidator.isEmpty(field)) {
+            console.log("Field is empty");
+            return false;
+        } else {
+            console.log("Field is  valid", field);
+            return true
+        }
+    }
+    
+
+    return(
+        <div style={style.container} >
+            <SideBar/>
+            <div style={style.input}>
+                <Row>
+                    <Col span={13} offset={4} style={style.inputHeader}>
+                        cadastro de atividade
+                    </Col>
+                </Row>
+
+                <InputGroup >
+                    <Row >
+                        <Col span={13} offset={4} style={style.item}>
+                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Nome da Nova Atividade" allowClear />
+                        </Col>
+                    </Row>
+                </InputGroup>
+                <InputGroup>
+                    <Row>
+                        <Col span={6} offset={4} style={style.item}>
+                            <TaskSelection />
+                        </Col>
+                        <Col span={6} offset={1} style={style.item}>
+                            <InputNumber onChange={value=>setWorkload(value)} size="large" Option min={1} placeholder="Carga Horária" style={{width:'100%'}}/>
+                        </Col>
+                    </Row>
+                </InputGroup>
+                <InputGroup size="large">
+                    <Row>
+                        <Col span={6} offset={4} style={style.item}>
+                            <DatePicker onChange={value=>setDate(value)} format={dateFormat} placeholder="Data da Atividade" style={{width:'100%'}} />
+                        </Col>
+                        <Col span={6} offset={1} style={style.item}>
+                            <TimePicker onChange={value=>setTime(value)} size="large" format={timeFormat} placeholder="Hora" style={{width:'100%'}}/>
+                        </Col>
+                    </Row>
+                </InputGroup>
+                <InputGroup size="large" >
+                    <Row >
+                        <Col span={13} offset={4} style={style.item}>
+                            <TextArea onChange={event=>setDescription(event.target.value)} autosize={{minRows:4, maxRows:6}} placeholder="Descrição da Atividade" />
+                        </Col>
+                    </Row>
+                </InputGroup>
+                <InputGroup size="large" >
+                    <Row >
+                        <Col span={6} offset={4} style={style.item}>
+                            <Button disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit} refresh="true">Cadastrar</Button>
+                        </Col>
+                    </Row>
+                </InputGroup>
+            </div>
+            
+        </div>
+    )
 }
 
-export default Form.create()(TaskRegister);
+export default Register;

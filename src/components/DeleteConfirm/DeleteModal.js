@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Modal, Button} from 'antd';
-import Dele from './DeleteForm';
+import DeleteForm from './DeleteForm';
 
 export default class DeleteModal extends Component {
 
@@ -11,7 +11,6 @@ export default class DeleteModal extends Component {
             return null;
         }
 
-
         return (
             <div>
                 <Modal
@@ -20,13 +19,13 @@ export default class DeleteModal extends Component {
                     onOk={this.props.onClose}
                     onCancel={this.props.onClose}
                     style={{top:'5rem'}}
-                    footer={[
-                        <Button type='submit' onClick={this.props.onClose}>
+                    footer={
+                        <Button onClick={this.props.onClose}>
                             Voltar
                         </Button>
-                    ]}
+                    }
                 >
-                    <Dele taskId={this.props.taskId}/>
+                    <DeleteForm taskId={this.props.taskId}/>
                 </Modal>
             </div>
         )

@@ -6,7 +6,6 @@ import Sidebar from '../Sider/SideBar';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 
-
 const Dashboard = () => {
     const [tasks, setTasks] = useState();
     const [url, setUrl] = useState('http://localhost:8080/task');
@@ -22,9 +21,9 @@ const Dashboard = () => {
 
     const getAllTasks = async () => {
         return await axios(url)
-                        .then(result => {
-                            return result.data.data
-                        })
+            .then(result => {
+                return result.data.data
+            })
     }
 
     const renderCard = (task, tasks) => {
