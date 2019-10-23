@@ -7,21 +7,15 @@ const FormItem = Form.Item;
 
 class DeleteForm extends Component {
 
-
-    removeTask = () => {
+    handleSubmit = async () => {
         const url = 'http://localhost:8080/task/' + this.props.taskId;
-        console.log(url);
         axios.delete(url, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/JSON',
                 'Content-Type': 'application/JSON'
             }
-        }).fetch(response => console.log(response)) 
-    }
-
-    handleSubmit = async () => {
-        this.removeTask();
+        })
 
         // this.props.form.validateFields((err, values) => {
         //     console.log(err)

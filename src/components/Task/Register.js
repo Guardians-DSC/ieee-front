@@ -84,11 +84,17 @@ const Register = props => {
     }
     
     const handleSubmit = async () => {
+        return axios.post(url, {
+            name: name,
+            type: type,
+            workload: workload,
+            date: date,
+            time: time,
+            description: description
+        }).then(window.location.reload())
         
-        console.log(validateFields())
-
-        console.log('app rodando!');
-
+        // console.log(validateFields())
+        // console.log('app rodando!');
         // fetch(URL)
         // .then(response => response.json())
         // .then(dado => {
@@ -98,35 +104,37 @@ const Register = props => {
         //         $disciplinas.appendChild($p);
         //         $p.innerText = "Disciplina: " + disciplina.nome;
         //     });
-        return await axios.post(url, {
-            name: name,
-            type: type,
-            workload: workload,
-            date: date,
-            time: time,
-            description: description
-        })
-        .then(function (response) {
-            console.log(response)
-        })
-        .catch(function (err) {
-            console.log(err)
-        }) 
+        //     return axios.post(url, {
+        //         name: name,
+        //         type: type,
+        //         workload: workload,
+        //         date: date,
+        //         time: time,
+        //         description: description
+        //     })
+        //     .then(function (response) {
+        //         console.log(response)
+        //     })
+        //     .catch(function (err) {
+        //         console.log(err)
+        //     }) 
     }
     
     const validateFields = () => {
-        const isNameValid = validateName(name);
-        const isTypeValid = validateName(type);
+        const isNameValid = validateNotEmpty(name);
+        const isTypeValid = validateNotEmpty(type);
         const isWorkloadValid = validateUndefined(workload);
         const isDateValid = validateUndefined(date);
         const isTimeValid = validateUndefined(time);
+        const isDescriptionValid = validateNotEmpty(description);
         
         return (
             isNameValid &&
             isTypeValid &&
             isWorkloadValid &&
             isDateValid &&
-            isTimeValid
+            isTimeValid &&
+            isDescriptionValid
             ) 
         }
 
@@ -139,7 +147,7 @@ const Register = props => {
     }
     
     
-    const validateName = (field) => {
+    const validateNotEmpty = (field) => {
         if (fieldsValidator.isEmpty(field)) {
             console.log("Field is empty");
             return false;
@@ -197,7 +205,7 @@ const Register = props => {
                 <InputGroup size="large" >
                     <Row >
                         <Col span={6} offset={4} style={style.item}>
-                            <Button disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit}>Cadastrar</Button>
+                            <Button disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit} refresh="true">Cadastrar</Button>
                         </Col>
                     </Row>
                 </InputGroup>
