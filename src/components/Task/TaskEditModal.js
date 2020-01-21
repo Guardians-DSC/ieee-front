@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {Modal} from 'antd';
 import TaskRegister from './TaskRegister';
 import axios from 'axios';
+import { OmitProps } from 'antd/lib/transfer/renderListBody';
 
 
 const url = 'http://localhost:8080/task'

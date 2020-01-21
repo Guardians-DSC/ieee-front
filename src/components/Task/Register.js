@@ -55,10 +55,11 @@ const style = {
 
 const Register = props => {
     const [name, setName] = useState('');
+    const [nucle, setnucle] = useState('');
     const [type, setType] = useState();
     const [workload, setWorkload] = useState();
-    const [time, setTime] = useState(undefined);
-    const [date, setDate] = useState(undefined);
+    const [initialLine, setInitialLine] = useState(undefined);
+    const [finishLine, setFinishLine] = useState(undefined);
     const [description, setDescription] = useState('');
     const [url, setUrl] = useState('http://localhost:8080/task')
     
@@ -86,10 +87,11 @@ const Register = props => {
     const handleSubmit = async () => {
         return axios.post(url, {
             name: name,
+            nucle, nucle,
             type: type,
             workload: workload,
-            date: date,
-            time: time,
+            initialLine: initialLine,
+            finishLine: finishLine,
             description: description
         }).then(window.location.reload())
         
@@ -108,10 +110,8 @@ const Register = props => {
         //         name: name,
         //         type: type,
         //         workload: workload,
-        //         date: date,
-        //         time: time,
-        //         description: description
-        //     })
+        //         initialDate: initialDate,
+        //         i 
         //     .then(function (response) {
         //         console.log(response)
         //     })
@@ -122,19 +122,20 @@ const Register = props => {
     
     const validateFields = () => {
         const isNameValid = validateNotEmpty(name);
+        const isNucleValid = validateNotEmpty(nucle);
         const isTypeValid = validateNotEmpty(type);
         const isWorkloadValid = validateUndefined(workload);
-        const isDateValid = validateUndefined(date);
-        const isTimeValid = validateUndefined(time);
+        const isInitialLineValid = validateUndefined(initialLine);
+        const isFinishLineValid = validateUndefined(finishLine);
         const isDescriptionValid = validateNotEmpty(description);
-        
         return (
             isNameValid &&
+            isNucleValid &&
             isTypeValid &&
             isWorkloadValid &&
-            isDateValid &&
-            isTimeValid &&
-            isDescriptionValid
+            isInitialLineValid &&
+            isFinishLineValid &&
+            isDescriptionValid 
             ) 
         }
 
@@ -167,11 +168,17 @@ const Register = props => {
                         cadastro de atividade
                     </Col>
                 </Row>
-
                 <InputGroup >
                     <Row >
                         <Col span={13} offset={4} style={style.item}>
                             <Input onChange={event => setName(event.target.value)} size="large" placeholder="Nome da Nova Atividade" allowClear />
+                        </Col>
+                    </Row>
+                </InputGroup>
+                <InputGroup >
+                    <Row >
+                        <Col span={13} offset={4} style={style.item}>
+                            <Input onChange={event => setnucle(event.target.value)} size="large" placeholder="Núcleo a qual pertence a atividade" allowClear />
                         </Col>
                     </Row>
                 </InputGroup>
@@ -188,11 +195,21 @@ const Register = props => {
                 <InputGroup size="large">
                     <Row>
                         <Col span={6} offset={4} style={style.item}>
-                            <DatePicker onChange={value=>setDate(value)} format={dateFormat} placeholder="Data da Atividade" style={{width:'100%'}} />
+                            <DatePicker onChange={value=>setInitialLine(value)} format={dateFormat} placeholder="Data De Inicio" style={{width:'100%'}} />
                         </Col>
                         <Col span={6} offset={1} style={style.item}>
-                            <TimePicker onChange={value=>setTime(value)} size="large" format={timeFormat} placeholder="Hora" style={{width:'100%'}}/>
+                            <TimePicker onChange={value=>setInitialLine(value)} size="large" format={timeFormat} placeholder="Horário De Início" style={{width:'100%'}}/>
                         </Col>
+                    </Row>
+                </InputGroup>
+                <InputGroup size="large">
+                    <Row>
+                        <Col span={6} offset={4} style={style.item}>
+                            <DatePicker onChange={value=>setFinishLine(value)} format={dateFormat} placeholder="Data De Encerramento" style={{width:'100%'}} />
+                        </Col>
+                        {/* <Col span={6} offset={1} style= {style.item}>
+                            <TimePicker onChange={value=>setFinishLine(value)} size="large" format={timeFormat} placeholder="Horário De Encerramento" style={{width:'100%'}}/>
+                        </Col> */}
                     </Row>
                 </InputGroup>
                 <InputGroup size="large" >
@@ -209,8 +226,7 @@ const Register = props => {
                         </Col>
                     </Row>
                 </InputGroup>
-            </div>
-            
+            </div>            
         </div>
     )
 }

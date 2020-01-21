@@ -30,7 +30,7 @@ export default class SideBar extends Component {
     render() {
         return (
             <Layout>
-                <Sider breakpoint="lg" collapsedWidth="0" style={{height:'100vh', minHeight:'100vh', zIndex:1}}>
+                <Sider breakpoint="lg" collapsedWidth="0" style={{height:'110vh', minHeight:'100vh', zIndex:1}}>
                     <div className="logo">
                         <img className="i3eIcon" src={imgSrc} alt="logo ieee"/>
                         <h3 className="i3eTitle">IEEE Task Manager</h3>

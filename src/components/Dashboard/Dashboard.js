@@ -12,9 +12,9 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const fetchTasks = await getAllTasks()
+            const fetchTasks = await getAllTasks();
             setTasks(fetchTasks);
-            renderCard(taska, fetchTasks)
+            renderCard(taska, fetchTasks);
         }
         fetchData()
     }, []);
@@ -32,7 +32,12 @@ const Dashboard = () => {
                 tasks.map((task,index) => (
                     <TaskCard
                         title={task.name}
+                        nucle={task.nucle}
                         description={task.description}
+                        type={task.type}
+                        workload={task.workload}
+                        initialLine={task.initialLine}
+                        finishLine={task.finishLine}
                         id={task._id}
                         key={index}
                     />
@@ -43,7 +48,12 @@ const Dashboard = () => {
         return (
             <TaskCard
                 title={task.name}
+                nucle={task.nucle}
                 description={task.description}
+                type={task.type}
+                workload={task.workload}
+                initialLine={task.initialLine}
+                finishLine={task.finishLine}
                 id={task.id}
                 key={1}
             />
@@ -64,7 +74,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div style={{display:'flex',height:'100vh'}}>
+        <div style={{display:'flex',height:'110vh'}}>
             <Sidebar/>
             <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}}>
                 <Row gutter={{xs:4, sm:16}} style={rowStyle}>

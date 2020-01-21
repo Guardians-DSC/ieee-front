@@ -87,13 +87,16 @@ class TaskRegister extends React.Component {
                 'Content-Type': 'application/JSON'
             }, body: JSON.stringify({
                 name: formData.name,
+                nucle: formData.nucle,
                 type:  formData.type,
-                description:  formData.description,
-                date:  formData.date._d,
                 workload:  formData.workload,
-                time:  formData.time._d
+                initialLine:  formData.initialLine._d,
+                finishLine:  formData.finishLine._d,
+                description:  formData.description
+
             })
         })
+        console.log(formData);
     }
 
     handleSubmit = (e) => {

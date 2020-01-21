@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import './taskCard.css';
 import TaskEditModal from '../TaskEditModal';
 import DeleteModal from '../../DeleteConfirm/DeleteModal'
+import Grid from 'antd/lib/card/Grid';
 
 const { Meta } = Card;
 
@@ -15,6 +16,7 @@ export default class Task extends Component {
             isRegisterOpen: false,
             isEdition: true,
             isDeleteOpen: false,
+//            isDownloadOpen: false
         };
     };
 
@@ -55,6 +57,12 @@ export default class Task extends Component {
         })
     }
 
+    // openDownloadModal = () => {
+    //     this.setState({
+    //         isDownloadOpen: !this.state.isDownloadOpen
+    //     })
+    // }
+
     openDeleteModal = () => {
         this.setState({
             isDeleteOpen: !this.state.isDeleteOpen
@@ -68,6 +76,7 @@ export default class Task extends Component {
                 <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={8} lg={8} xl={4}>
                     <Card
                         title={this.props.title}
+                        cover={this.props.nucle}
                         hoverable={true}
                         actions={[
                             <Icon
@@ -80,6 +89,7 @@ export default class Task extends Component {
                             <Icon
                                 key='2'
                                 type='copy'
+                                onClick={this.openDownloadModal}
                                 theme='twoTone'
                                 style={this.iconStyle}
                             />,
@@ -96,18 +106,31 @@ export default class Task extends Component {
                     >
                         <DeleteModal show={this.state.isDeleteOpen} onClose={this.openDeleteModal} taskId={this.props.id}/>
                         <TaskEditModal 
-                            id={this.props.id} 
+                            id={this.props.id}
                             title={this.props.name}
                             description={this.props.description}
                             isEdition={this.state.isEdition} 
-                            show={this.state.isRegisterOpen} 
+                            show={this.state.isRegisterOpen}
                             onClose={this.openRegisterModal}
                         />
+                        <Meta description={`Carga Horária: ${this.props.workload}`}/>
+                        <Meta description={`Tipo: ${this.props.type}`}/>
+
+                        <Meta description={`Inicio: ${this.props.initialLine}`}/>
+                        <Meta description={`Encerramento: ${this.props.finishLine}`}/>
                         <Meta style={this.metaStyle} description={this.props.description}/>
-                        
                     </Card>
                 </Col>
             </React.Fragment>
         );
     }
 }
+
+
+/*
+    openDownloadModal = () => {
+        this.setState({
+            isDownloadOpen: !this.state.isDownloadOpen
+        })
+    }
+*/
