@@ -5,7 +5,6 @@ import App from './App';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Register from './components/Task/Register';
 import MemberRegister from './components/Member/MemberRegister';
-import TaskEditModal from './components/Task/TaskEditModal';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

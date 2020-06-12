@@ -9,7 +9,6 @@ import { Row, Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } 
 import 'antd/dist/antd.css';
 import { validate } from '@babel/types';
 
-
 const InputGroup = Input.Group;
 const { TextArea } = Input;
 const { Option } = Select;
@@ -32,10 +31,10 @@ const style = {
         'transform': 'translate(-50%, -50%)'
     },
     input: {
-        'display': 'inline',
+        'display': 'block',
         'margin': 'auto',
         'width' : '90%',
-        'paddingTop': '20rem',
+        'paddingTop': '12rem',
         'height': '100vh',
         
     },
@@ -53,7 +52,7 @@ const style = {
 }
 
 
-const Register = props => {
+const Register = () => {
     const [name, setName] = useState('');
     const [nucle, setnucle] = useState('');
     const [type, setType] = useState();
@@ -68,22 +67,7 @@ const Register = props => {
             <Option value={taskType} key={index}> {taskType} </Option>
         )
     );
-        
-        const TaskSelection = () => {
-            return (<Select
-            showSearch
-            placeholder="Selecione o tipe de Atividade"
-            style={{width: '100%'}}
-            allowClear
-            showArrow={false}
-            size="large"
-            value={type}
-            onChange={event=>setType(event)}
-        >
-            {TaskOptions}
-        </Select>)
-    }
-    
+            
     const handleSubmit = async () => {
         return axios.post(url, {
             name: name,
@@ -136,8 +120,8 @@ const Register = props => {
             isInitialLineValid &&
             isFinishLineValid &&
             isDescriptionValid 
-            ) 
-        }
+        );
+    }
 
     const validateUndefined = (field) => {
         if (fieldsValidator.isUndefined(field)) {
@@ -163,70 +147,42 @@ const Register = props => {
         <div style={style.container} >
             <SideBar/>
             <div style={style.input}>
-                <Row>
-                    <Col span={13} offset={4} style={style.inputHeader}>
-                        cadastro de atividade
-                    </Col>
-                </Row>
-                <InputGroup >
-                    <Row >
-                        <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Nome da Nova Atividade" allowClear />
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup >
-                    <Row >
-                        <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setnucle(event.target.value)} size="large" placeholder="Núcleo a qual pertence a atividade" allowClear />
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup>
-                    <Row>
-                        <Col span={6} offset={4} style={style.item}>
-                            <TaskSelection />
-                        </Col>
-                        <Col span={6} offset={1} style={style.item}>
-                            <InputNumber onChange={value=>setWorkload(value)} size="large" Option min={1} placeholder="Carga Horária" style={{width:'100%'}}/>
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup size="large">
-                    <Row>
-                        <Col span={6} offset={4} style={style.item}>
-                            <DatePicker onChange={value=>setInitialLine(value)} format={dateFormat} placeholder="Data De Inicio" style={{width:'100%'}} />
-                        </Col>
-                        <Col span={6} offset={1} style={style.item}>
-                            <TimePicker onChange={value=>setInitialLine(value)} size="large" format={timeFormat} placeholder="Horário De Início" style={{width:'100%'}}/>
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup size="large">
-                    <Row>
-                        <Col span={6} offset={4} style={style.item}>
-                            <DatePicker onChange={value=>setFinishLine(value)} format={dateFormat} placeholder="Data De Encerramento" style={{width:'100%'}} />
-                        </Col>
-                        {/* <Col span={6} offset={1} style= {style.item}>
-                            <TimePicker onChange={value=>setFinishLine(value)} size="large" format={timeFormat} placeholder="Horário De Encerramento" style={{width:'100%'}}/>
-                        </Col> */}
-                    </Row>
-                </InputGroup>
-                <InputGroup size="large" >
-                    <Row >
-                        <Col span={13} offset={4} style={style.item}>
-                            <TextArea onChange={event=>setDescription(event.target.value)} autosize={{minRows:4, maxRows:6}} placeholder="Descrição da Atividade" />
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup size="large" >
-                    <Row >
-                        <Col span={6} offset={4} style={style.item}>
-                            <Button disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit} refresh="true">Cadastrar</Button>
-                        </Col>
-                    </Row>
-                </InputGroup>
-            </div>            
+                <Col span={13} offset={4} style={style.inputHeader}> CADASTRO DE ATIVIDADE </Col>
+                <Col span={13} offset={4} style={style.item}>
+                    <Input placeholder="Nome da Nova Atividade" onChange={event => setName(event.target.value)} size="large" allowClear />
+                </Col>
+                <Col span={13} offset={4} style={style.item}>
+                    <Input placeholder="Núcleo a qual pertence a atividade" onChange={event => setnucle(event.target.value)} size="large" allowClear />
+                </Col>
+                <Col span={6} offset={4} style={style.item}>
+                    <DatePicker placeholder="Data De Inicio" onChange={value=>setInitialLine(value)} size="large" format={dateFormat} style={{width:'100%'}} />
+                </Col>
+                <Col span={6} offset={1} style={style.item}>
+                    <DatePicker placeholder="Data De Encerramento" onChange={value=>setFinishLine(value)} size="large" format={dateFormat} style={{width:'100%'}} />
+                </Col>
+                <Col span={6} offset={4} style={style.item}>
+                    <TimePicker placeholder="Horário De Início" onChange={value=>setInitialLine(value)} size="large" format={timeFormat} style={{width:'100%'}}/>
+                </Col>
+                <Col span={6} offset={1} style={style.item}>
+                    <TimePicker placeholder="Horário De Encerramento" onChange={value=>setInitialLine(value)} size="large" format={timeFormat} style={{width:'100%'}}/>
+                </Col>
+                <Col span={6} offset={4} style={style.item}>
+                    <InputNumber placeholder="Carga Horária" onChange={value=>setWorkload(value)} size="large" Option min={1} style={{width:'100%'}}/>
+                </Col>
+                <Col span={6} offset={1} style={style.item}>
+                    <Select placeholder="Tipo da Atividade" onChange={event=>setType(event)} size="large" value={type} showArrow={false} style={{width: '100%'}}>
+                        {TaskOptions}
+                    </Select>                
+                </Col>
+                <Col span={13} offset={4} style={style.item}>
+                    <TextArea placeholder="Descrição da Atividade" onChange={event=>setDescription(event.target.value)} autosize={{minRows:4, maxRows:6}}/>
+                </Col>
+                <Col span={6} offset={4} style={style.item}>
+                    <Button  disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit} refresh="true">
+                        Cadastrar
+                    </Button>
+                </Col>
+            </div>
         </div>
     )
 }

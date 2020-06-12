@@ -1,26 +1,41 @@
-import React, {useEffect} from 'react'
-import {Modal} from 'antd';
-import TaskRegister from './TaskRegister';
-import axios from 'axios';
-import { OmitProps } from 'antd/lib/transfer/renderListBody';
+import React, { Component } from 'react'
+import {Modal, Button} from 'antd';
+import PropTypes from 'prop-types';
+import Register from './TaskRegister';
 
+class TaskEditModal extends Component  {
 
-const url = 'http://localhost:8080/task'
-const TaskEditModal = (props) => {
-const {show, onClose, isEdition, id, title, description} = props;
+    render() {
 
-    return show && (
-        <div>
-            <Modal
-                visible={true}
-                title='Editar Atividade'
-                onOk={onClose}
-                onCancel={onClose}
-            >
-                <TaskRegister isEdition id title description />
-            </Modal>
-        </div>
-    )
-};
+        if (!this.props.show) {
+            return null
+        }
+        
+        return (
+            <div>
+                <Modal 
+                    visible={true}
+                    title="Cadastro de Atividade"
+                    onOk={this.props.onClose}
+                    onCancel={this.props.onClose}
+                    style={{top:'5rem'}}
+                    footer={[
+                        <Button type='submit' onClick={this.props.onClose}>
+                            Voltar
+                        </Button>
+                    ]}
+                >
+                    <Register addTask={this.props.addTask} isEdition={this.props.isEdition}/>
+                </Modal>
+            </div>
+        )
+    }
+}
+
+TaskEditModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    children: PropTypes.node
+}
 
 export default TaskEditModal;

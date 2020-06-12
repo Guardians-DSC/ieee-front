@@ -63,7 +63,7 @@ const Dashboard = () => {
    
    const rowStyle = {
       flexBasis:'50%',
-      height:'95vh',
+      height:'98vh',
       overflowY:'auto'
     }
 
@@ -74,9 +74,19 @@ const Dashboard = () => {
     }
 
     return (
-        <div style={{display:'flex',height:'110vh'}}>
+        <div style={{        
+            'display': 'flex',
+            'width': '100vw',
+            'height': '100vh',
+            
+            // Centraliza o componente
+            'position': 'absolute',
+            'top': '50%',
+            'left': '50%',
+            'transform': 'translate(-50%, -50%)'
+        }}>
             <Sidebar/>
-            <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}}>
+            <div style={{ background: '#ECECEC', padding: '1rem'}}>
                 <Row gutter={{xs:4, sm:16}} style={rowStyle}>
                     {renderCard(taska, tasks)}
                 </Row>

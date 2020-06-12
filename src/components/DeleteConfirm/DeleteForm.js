@@ -4,10 +4,11 @@ import axios from 'axios';
 
 const FormItem = Form.Item;
 
+const DeleteForm = () => {
 
-class DeleteForm extends Component {
+    const { getFieldDecorator } = this.props.form;
 
-    handleSubmit = async () => {
+    const handleSubmit = async () => {
         const url = 'http://localhost:8080/task/' + this.props.taskId;
         axios.delete(url, {
             method: 'DELETE',
@@ -27,22 +28,18 @@ class DeleteForm extends Component {
 
     }                                           
 
-    render() {
-        const { getFieldDecorator } = this.props.form;
-
-        return (
-            <Form layout='inline' onSubmit={this.handleSubmit}>
-                <FormItem >
-                    {getFieldDecorator('confirm', {
-                        rules:[{required:true, message:'Confirme a remoção da atividade'}],
-                    })(
-                        <Button type='danger' htmlType='submit' onClick={this.handleSubmit}>Sim, eu quero remover a atividade</Button>
-                    )
-                    }
-                </FormItem>
-            </Form>
-        )
-    }
+    return (
+        <Form layout='inline' onSubmit={handleSubmit}>
+            <FormItem >
+                {getFieldDecorator('confirm', {
+                    rules:[{required:true, message:'Confirme a remoção da atividade'}],
+                })(
+                    <Button type='danger' htmlType='submit' onClick={handleSubmit}>Sim, eu quero remover a atividade</Button>
+                )
+                }
+            </FormItem>
+        </Form>
+    )
 }
 
-export default Form.create()(DeleteForm);
+export default DeleteForm;

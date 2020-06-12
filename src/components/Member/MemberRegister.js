@@ -120,44 +120,22 @@ const Register = props => {
         <div style={style.container} >
             <SideBar/>
             <div style={style.input}>
-                <Row>
-                    <Col span={13} offset={4} style={style.inputHeader}>
-                        cadastro de membro
-                    </Col>
-                </Row>
-
-                <InputGroup >
-                    <Row >
-                        <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setName(event.target.value)} size="large" placeholder="Nome do Novo Membro" allowClear />
-                        </Col>
-                    </Row>
-                </InputGroup>
- 
-                <InputGroup >
-                    <Row >
-                        <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setEmail(event.target.value)} size="large" placeholder="Email" allowClear />
-                        </Col>
-                    </Row>
-                </InputGroup>
- 
-                <InputGroup >
-                    <Row >
-                        <Col span={13} offset={4} style={style.item}>
-                            <Input onChange={event => setSenha(event.target.value)} size="large" placeholder="Senha" allowClear />
-                        </Col>
-                    </Row>
-                </InputGroup>
-                <InputGroup size="large" >
-                    <Row >
-                        <Col span={6} offset={4} style={style.item}>
-                            <Button disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit}>Cadastrar</Button>
-                        </Col>
-                    </Row>
-                </InputGroup>
-             </div>
-            
+                <Col span={13} offset={4} style={style.inputHeader}> CADASTRO DE MEBRO </Col>
+                <Col span={13} offset={4} style={style.item}>
+                    <Input placeholder="Nome do Novo Membro" onChange={event => setName(event.target.value)} size="large" allowClear />
+                </Col>
+                <Col span={13} offset={4} style={style.item}>
+                    <Input placeholder="Email" onChange={event => setEmail(event.target.value)} size="large" allowClear />
+                </Col>
+                <Col span={13} offset={4} style={style.item}>
+                    <Input placeholder="Senha" onChange={event => setSenha(event.target.value)} size="large" allowClear />
+                </Col>
+                <Col span={6} offset={4} style={style.item}>
+                    <Button disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit}>
+                        Cadastrar
+                    </Button>
+                </Col>
+             </div>            
         </div>
     )
 }

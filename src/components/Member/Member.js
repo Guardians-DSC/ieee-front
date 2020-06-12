@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import {Card, Col, Icon} from 'antd';
 
-export default class Member extends Component {
+const Member = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: null
-        };
-    };
-
-    cardStyle = {
+    const cardStyle = {
         textAlign: 'center'
     }
 
-    iconStyle = {
+    const iconStyle = {
         width:'13rem'
     }
 
@@ -50,23 +43,23 @@ export default class Member extends Component {
         console.log(id)
     }
 
-    render() {
-        return (
-            <React.Fragment>
-                <Col span={4} style={{'marginBottom':'20px'}}  xs={24} sm={12} md={4}>
-                    <Card
-                        title={this.props.title}
-                        hoverable={true}
-                        actions={
-                            [
-                            this.editIcon , this.removeIcon]
-                        }
-                        style={this.cardStyle}
-                    >
-                        {this.props.description}
-                    </Card>
-                </Col>
-            </React.Fragment>
-        )
-    }
+    return (
+        <React.Fragment>
+            <Col span={4} style={{'marginBottom':'20px'}}  xs={24} sm={12} md={4}>
+                <Card
+                    title={this.props.title}
+                    hoverable={true}
+                    actions={
+                        [
+                        this.editIcon , this.removeIcon]
+                    }
+                    style={this.cardStyle}
+                >
+                    {this.props.description}
+                </Card>
+            </Col>
+        </React.Fragment>
+    )
 }
+
+export default Member;
