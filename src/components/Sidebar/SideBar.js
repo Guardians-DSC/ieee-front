@@ -1,20 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
-import 'antd/dist/antd.css';
-import TaskEditModal from '../Task/TaskCard/TaskEditModal';
-import {Link} from 'react-router-dom';
-import {useState, useEffect} from 'react';
 
 import style from './SidebarStyle'
 
 const { SubMenu } = Menu;
-const { Sider, Content } = Layout;
+const { Sider } = Layout;
 const imgSrc = "https://i1.wp.com/ieeer8.org/wp-content/uploads/2016/04/ieeelogo_512_transparent.png?fit=512%2C512&ssl=1";
 
 const SideBar = () => {
-
-    const [sideBarOpen, setSideBarOpen] = useState();
-
     return (
         <Sider breakpoint="lg" collapsedWidth="0" style={{zIndex:1}}>
             <div style={style.logo}>

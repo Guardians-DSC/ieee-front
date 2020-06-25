@@ -1,5 +1,4 @@
 import validator from 'validator';
-import { isEmptyStatement } from '@babel/types';
 
 const { ignore_whitespace } = validator;
 

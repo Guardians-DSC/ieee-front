@@ -45,19 +45,19 @@ const Register = () => {
             <div style={style.input}>
                 <Col span={13} offset={4} style={style.inputHeader}> CADASTRO DE MEBRO </Col>
                 <Col span={13} offset={4} style={style.item}>
-                    <Input placeholder="Nome do Novo Membro" onChange={event => setName(event.target.value)} size="large" allowClear />
+                    <Input placeholder="Nome do Novo Membro" onChange={value => setName(value)} size="large" allowClear />
                 </Col>
                 <Col span={13} offset={4} style={style.item}>
-                    <Input placeholder="Email" onChange={event => setEmail(event.target.value)} size="large" allowClear />
+                    <Input placeholder="Email" onChange={value => setEmail(value)} size="large" allowClear />
                 </Col>
                 <Col span={13} offset={4} style={style.item}>
-                    <Input placeholder="Senha" onChange={event => setPassword(event.target.value)} size="large" allowClear />
+                    <Input placeholder="Senha" onChange={value => setPassword(value)} size="large" allowClear />
                 </Col>
                 <Col span={13} offset={4} style={style.item}>
-                    <Input placeholder="Departament" onChange={event => setDepartament(event.target.value)} size="large" allowClear />
+                    <Input placeholder="Departament" onChange={value => setDepartament(value)} size="large" allowClear />
                 </Col>
                 <Col span={13} offset={4} style={style.item}>
-                    <Select placeholder="Cadastrar como administrador" size="large" onChange={event=>setDepartament(true)} showArrow={true} style={{width: '100%'}}>
+                    <Select placeholder="Cadastrar como administrador" size="large" onChange={value =>setIsAdmin(value)} showArrow={true} style={{width: '100%'}}>
                         <Option value={true} key={1}> {'Sim'} </Option>
                         <Option value={false} key={0}> {'Não'} </Option>
                     </Select>  
