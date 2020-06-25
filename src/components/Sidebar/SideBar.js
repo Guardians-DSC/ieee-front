@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
-import './sidebar.css';
-import TaskEditModal from '../Task/TaskEditModal';
+import TaskEditModal from '../Task/TaskCard/TaskEditModal';
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+
+import style from './SidebarStyle'
 
 const { SubMenu } = Menu;
 const { Sider, Content } = Layout;
@@ -16,9 +17,9 @@ const SideBar = () => {
 
     return (
         <Sider breakpoint="lg" collapsedWidth="0" style={{zIndex:1}}>
-            <div className="logo">
-                <img className="i3eIcon" src={imgSrc} alt="logo ieee"/>
-                <h3 className="i3eTitle">IEEE Task Manager</h3>
+            <div style={style.logo}>
+                <img style={style.i3eIcon} src={imgSrc} alt="logo ieee"/>
+                <h3 style={style.i3eTitle}> IEEE Task Manager </h3>
             </div>
             <Menu theme='dark' mode='inline'>
                 <SubMenu key='sub1' title = { <div> <Icon type="container"/> <span> Atividades </span> </div> }>
@@ -31,7 +32,7 @@ const SideBar = () => {
                 </SubMenu>
 
                 <SubMenu key='sub2' title = { <div> <Icon type="user"/> <span> Membros </span> </div>}>
-                    <Menu.Item key="4" onClick={null}>
+                    <Menu.Item key="4"   ick={null}>
                         <Link to="/novoMembro"> Cadastrar Membro </Link>
                     </Menu.Item>
                 </SubMenu>

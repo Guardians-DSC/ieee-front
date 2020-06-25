@@ -18,11 +18,12 @@ const fieldsValidator = {
      * @param {*} field 
      */
     isEmpty: function (field) {
-        if (!this.isUndefined(field)) {
+        try {
             const trimedField = validator.trim(field, ' ');
-            return validator.isEmpty(trimedField, {ignore_whitespace})
+            return validator.isEmpty(trimedField, {ignore_whitespace});
+        } catch {
+            return false;
         }
-        return false
     },
 
     /**
@@ -30,10 +31,11 @@ const fieldsValidator = {
      * @param {*} field 
      */
     isNumeric: function (field) {
-        if (!this.isUndefined(field)) {
+        try {
             return validator.isNumeric(field, {no_symbols: true})
+        } catch {
+            return false;
         }
-        return false;
     }
 }
 

@@ -3,16 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Register from './components/Task/Register';
-import MemberRegister from './components/Member/MemberRegister';
+import TaskRegister from './components/Task/Register/Register';
+import MemberRegister from './components/Member/Register';
 import * as serviceWorker from './serviceWorker';
+
+import { UserProvider } from '../src/storage/context/UserContext';
+import { TaskProvider } from '../src/storage/context/TaskContext';
 
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
-            <Route path="/" exact={true} component={App}/>
-            <Route path="/novaAtividade" component={Register}/>
-            <Route path="/novoMembro" component={MemberRegister}/>
+            <TaskProvider>
+            <UserProvider>
+                <Route path="/" exact={true} component={App}/>
+                <Route path="/novaAtividade" component={TaskRegister}/>
+                <Route path="/novoMembro" component={MemberRegister}/>
+            </UserProvider>
+            </TaskProvider>
         </Switch>
     </BrowserRouter>
     , document.getElementById('root')
