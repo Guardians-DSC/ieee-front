@@ -1,78 +1,44 @@
 import React from 'react'
-import 'antd/dist/antd.css';
+import {useState, useEffect, useContext} from 'react';
 import {Row} from 'antd';
+//import 'antd/dist/antd.css';
+
+import { TaskContext } from '../../storage/context/TaskContext';
 import TaskCard from '../Task/TaskCard/TaskCard';
-import Sidebar from '../Sider/SideBar';
-import axios from 'axios';
-import {useState, useEffect} from 'react';
+import Sidebar from '../Sidebar/SideBar';
+import 'antd/dist/antd.css';
+
+import style from './DashboardStyle'
 
 const Dashboard = () => {
-    const [tasks, setTasks] = useState();
-    const [url, setUrl] = useState('http://localhost:8080/task');
+  const { getAllTasks } = useContext(TaskContext);
+  const [tasks, setTasks] = useState();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const fetchTasks = await getAllTasks()
-            setTasks(fetchTasks);
-            renderCard(taska, fetchTasks)
-        }
-        fetchData()
-    }, []);
-
-    const getAllTasks = async () => {
-        return await axios(url)
-            .then(result => {
-                return result.data.data
-            })
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchTasks = await getAllTasks();
+      setTasks(fetchTasks);
+      renderCard(fetchTasks);
     }
+    fetchData();
+  }, [tasks, getAllTasks]);
 
-    const renderCard = (task, tasks) => {
-        if (tasks !== undefined) {
-            return (
-                tasks.map((task,index) => (
-                    <TaskCard
-                        title={task.name}
-                        description={task.description}
-                        id={task._id}
-                        key={index}
-                    />
-                )
-                ) 
-            )
-        }
-        return (
-            <TaskCard
-                title={task.name}
-                description={task.description}
-                id={task.id}
-                key={1}
-            />
-        )
+  const renderCard = (tasks) => {
+    if (tasks !== undefined) {
+      return tasks.map((task,index) => <TaskCard currentask={task} key={index} />);
     }
-    
-   
-   const rowStyle = {
-      flexBasis:'50%',
-      height:'95vh',
-      overflowY:'auto'
-    }
+  }
 
-    const taska = {
-        name:"asd",
-        description:"Amanhã",
-        id:1
-    }
-
-    return (
-        <div style={{display:'flex',height:'100vh'}}>
-            <Sidebar/>
-            <div style={{ background: '#ECECEC', padding: '1rem', width:'100vw'}}>
-                <Row gutter={{xs:4, sm:16}} style={rowStyle}>
-                    {renderCard(taska, tasks)}
-                </Row>
-            </div>
-        </div>
-    )
+  return (
+    <div style={style.container}>
+      <Sidebar/>
+      <div style={style.scrollContainer}>
+        <Row gutter={{xs:4, sm:16}} style={style.rowStyle}>
+          {renderCard(tasks)}
+        </Row>
+      </div>
+    </div>
+  )
 }
 
 export default Dashboard;
