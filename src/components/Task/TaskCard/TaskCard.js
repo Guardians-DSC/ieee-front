@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react'
 import {Card, Col, Icon} from 'antd';
 import 'antd/dist/antd.css';
+
+import formatData from '../../../Utils/formatData';
 import PopupEdit from './TaskPopupEdit/PopupEdit';
 import PopupDelete from './TaskPopupDelete/PopupDelete';
 
@@ -16,7 +18,7 @@ const TaskCard = ( ctask ) => {
 
   return (
     <React.Fragment>
-      <Col span={4} style={{'marginBottom':'20px'}} xs={24} sm={12} md={8} lg={8} xl={4}>
+      <Col span={4} style={{'marginBottom':'20px', 'minWidth':'33%', 'maxHeight':'80vw'}} xs={24} sm={12} md={8} lg={8} xl={4}>
         <Card
           title={task.name}
           cover={task.nucle}
@@ -30,11 +32,11 @@ const TaskCard = ( ctask ) => {
         >
           <Meta style={style.metaStyle} description={`Carga Horária: ${task.workload}`}/>
           <Meta style={style.metaStyle} description={`Tipo: ${task.type}`}/>
-          <Meta style={style.metaStyle} description={`Inicio: ${task.initialDate}`}/>
-          <Meta style={style.metaStyle} description={`Encerramento: ${task.finalDate}`}/>
+          <Meta style={style.metaStyle} description={`Data de Início: ${formatData.fDate(task.initialDate)}`}/>
+          <Meta style={style.metaStyle} description={`Data de Encerramento: ${formatData.fDate(task.finalDate)}`}/>
+          <Meta style={style.metaStyle} description={`Horário de Inicio: ${formatData.fTime(task.startTime)}`}/>
+          <Meta style={style.metaStyle} description={`Horário de Encerramento: ${formatData.fTime(task.closingTime)}`}/>
           <Meta style={style.metaStyle} description={`Descrição: ${task.description}`}/>
-          {/* <Meta description={`Inicio: ${task.initialDate} - ${task.startTime}`}/> */}
-          {/* <Meta description={`Encerramento: ${task.finalDate} - ${task.closingTime}`}/> */}
 
           <PopupEdit task={task} openPopup={openPopupEdit} onClose={() => setOpenEditPopup(!openPopupEdit)}/>
           <PopupDelete task={task} openPopup={openPopupDelete} onClose={() => setOpenPopupDelete(!openPopupDelete)}/>

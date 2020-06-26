@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
 
 import SideBar from '../../Sidebar/SideBar';
-import fieldsValidator from '../../../services/fieldsValidator';
+import fieldsValidator from '../../../Utils/fieldsValidator';
 import { TaskContext } from '../../../storage/context/TaskContext';
 
 import style from './RegisterStyle'
@@ -17,15 +17,15 @@ const dateFormat = 'DD-MM-YYYY';
 
 const Register = () => {
   const { addTask } = useContext(TaskContext);
-  const [name, setName] = useState('');
-  const [nucle, setNucle] = useState('');
+  const [name, setName] = useState();
+  const [nucle, setNucle] = useState();
   const [type, setType] = useState();
   const [workload, setWorkload] = useState();
-  const [initialDate, setInitialDate] = useState(undefined);
-  const [finalDate, setFinalDate] = useState(undefined);
-  const [startTime, setStartTime] = useState(undefined);
-  const [closingTime, setClosingTime] = useState(undefined);
-  const [description, setDescription] = useState('');
+  const [initialDate, setInitialDate] = useState();
+  const [finalDate, setFinalDate] = useState();
+  const [startTime, setStartTime] = useState();
+  const [closingTime, setClosingTime] = useState();
+  const [description, setDescription] = useState();
               
   const handleSubmit = () => {
     addTask ({
@@ -39,6 +39,7 @@ const Register = () => {
       workload: workload,
       nucle: nucle
     });
+    window.location.reload();
   }
   
   const isUndefinedField = ( field ) => fieldsValidator.isUndefined( field ) ? true : false;
@@ -72,22 +73,22 @@ const Register = () => {
       <div style={style.input}>
         <Col span={13} offset={4} style={style.inputHeader}> CADASTRO DE ATIVIDADE </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Input placeholder="Nome da Nova Atividade" onChange={value => setName(value)} size="large" allowClear />
+          <Input placeholder="Nome da Nova Atividade" onChange={e => setName(e.target.value)} size="large" allowClear />
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Input placeholder="Núcleo a qual pertence a atividade" onChange={value => setNucle(value)} size="large" allowClear />
+          <Input placeholder="Núcleo a qual pertence a atividade" onChange={e => setNucle(e.target.value)} size="large" allowClear />
         </Col>
         <Col span={6} offset={4} style={style.item}>
-          <DatePicker placeholder="Data De Inicio" onChange={value => setInitialDate(value)} size="large" format={dateFormat} style={{width:'100%'}} />
+          <DatePicker placeholder="Data De Inicio" onChange={value => setInitialDate(value)} format={dateFormat} size="large" style={{width:'100%'}} />
         </Col>
         <Col span={6} offset={1} style={style.item}>
-          <DatePicker placeholder="Data De Encerramento" onChange={value => setFinalDate(value)} size="large" format={dateFormat} style={{width:'100%'}} />
+          <DatePicker placeholder="Data De Encerramento" onChange={value => setFinalDate(value)} format={dateFormat} size="large" style={{width:'100%'}} />
         </Col>
         <Col span={6} offset={4} style={style.item}>
-          <TimePicker placeholder="Horário De Início" onChange={value => setStartTime(value)} size="large" format={timeFormat} style={{width:'100%'}}/>
+          <TimePicker placeholder="Horário De Início" onChange={value => setStartTime(value)} format={timeFormat} size="large" style={{width:'100%'}}/>
         </Col>
         <Col span={6} offset={1} style={style.item}>
-          <TimePicker placeholder="Horário De Encerramento" onChange={value => setClosingTime(value)} size="large" format={timeFormat} style={{width:'100%'}}/>
+          <TimePicker placeholder="Horário De Encerramento" onChange={value => setClosingTime(value)} format={timeFormat} size="large" style={{width:'100%'}}/>
         </Col>
         <Col span={6} offset={4} style={style.item}>
           <InputNumber placeholder="Carga Horária" onChange={value => setWorkload(value)} size="large" Option min={1} style={{width:'100%'}}/>
@@ -98,7 +99,7 @@ const Register = () => {
           </Select>
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <TextArea placeholder="Descrição da Atividade" onChange={value => setDescription(value)} autoSize={{minRows:4, maxRows:6}}/>
+          <TextArea placeholder="Descrição da Atividade" onChange={e => setDescription(e.target.value)} autoSize={{minRows:4, maxRows:6}}/>
         </Col>
         <Col span={6} offset={4} style={style.item}>
           <Button  disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit} refresh="true">

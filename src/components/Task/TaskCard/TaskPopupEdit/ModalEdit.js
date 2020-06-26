@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useState, useContext } from 'react';
 import { Form,  Input, InputNumber, DatePicker, TimePicker, Select, Card, Button } from 'antd';
+import moment from 'moment';
 
-import fieldsValidator from '../../../../services/fieldsValidator';
+import fieldsValidator from '../../../../Utils/fieldsValidator';
 import { TaskContext } from '../../../../storage/context/TaskContext';
 
 const { Option } = Select;
@@ -14,7 +15,8 @@ const dateFormat = 'DD-MM-YYYY';
 const taskTypes = ['Reunião', 'Confraternização', 'Atividade', 'Técnica', 'Evento', 'Palestra', 'Workshop' , 'Competição'];
 
 const ModalEdit = ( ctask ) => {
-  const { setTasks } = useContext(TaskContext);
+  const taskId = ctask.task._id;
+  const { setTask } = useContext(TaskContext);
   const [name, setName] = useState(ctask.task.name);
   const [nucle, setNucle] = useState(ctask.task.nucle);
   const [type, setType] = useState(ctask.task.type);
@@ -26,7 +28,7 @@ const ModalEdit = ( ctask ) => {
   const [description, setDescription] = useState(ctask.task.description);
 
   const handleSubmit = () => {
-    setTasks ({
+    setTask ({
       name: name,
       type: type,
       description: description,
@@ -35,8 +37,10 @@ const ModalEdit = ( ctask ) => {
       startTime: startTime,
       closingTime: closingTime,
       workload: workload,
-      nucle: nucle
-    });
+      nucle: nucle,
+      _id: taskId
+    }); 
+    window.location.reload();
   }
 
   const isUndefinedField = ( field ) => fieldsValidator.isUndefined( field ) ? true : false;
@@ -68,25 +72,25 @@ const ModalEdit = ( ctask ) => {
     <Card>
       <Form layout="vertical" onSubmit={handleSubmit}>
         <FormItem>
-          <Input placeholder="Nome da Nova Atividade" onChange={value => setName(value)} size="large" allowClear />
+          <Input placeholder="Nome da Nova Atividade" defaultValue={name} onChange={e => setName(e.target.value)} size="large" allowClear />
         </FormItem>
         <FormItem>
-          <Input placeholder="Núcleo a qual pertence a atividade" onChange={value => setNucle(value)} size="large" allowClear />
+          <Input placeholder="Núcleo a qual pertence a atividade" defaultValue={nucle} onChange={e => setNucle(e.target.value)} size="large" allowClear />
         </FormItem>
         <FormItem>                            
-          <DatePicker placeholder="Data De Inicio" onChange={value => setInitialDate(value)} size="large" format={dateFormat} style={{width:'100%'}} />
+          <DatePicker placeholder="Data De Inicio" defaultValue={moment(initialDate)} onChange={value => setInitialDate(value)}  format={dateFormat} size="large" style={{width:'100%'}} />
         </FormItem>
         <FormItem>
-          <DatePicker placeholder="Data De Encerramento" onChange={value => setFinalDate(value)} size="large" format={dateFormat} style={{width:'100%'}} />
+          <DatePicker placeholder="Data De Encerramento" defaultValue={moment(finalDate)} onChange={value => setFinalDate(value)} format={dateFormat} size="large" style={{width:'100%'}} />
         </FormItem>
         <FormItem>                            
-          <TimePicker placeholder="Horário De Início" onChange={value => setStartTime(value)} size="large" format={timeFormat} style={{width:'100%'}}/>
+          <TimePicker placeholder="Horário De Início" defaultValue={moment(startTime)} onChange={value => setStartTime(value)} format={timeFormat} size="large" style={{width:'100%'}}/>
         </FormItem>
         <FormItem>
-          <TimePicker placeholder="Horário De Encerramento" onChange={value => setClosingTime(value)} size="large" format={timeFormat} style={{width:'100%'}}/>
+          <TimePicker placeholder="Horário De Encerramento" defaultValue={moment(closingTime)} onChange={value => setClosingTime(value)} format={timeFormat} size="large" style={{width:'100%'}}/>
         </FormItem>
         <FormItem>
-          <InputNumber placeholder="Carga Horária" onChange={value => setWorkload(value)} size="large" Option min={1} style={{width:'100%'}}/>
+          <InputNumber placeholder="Carga Horária" defaultValue={workload} onChange={value => setWorkload(value)} size="large" Option min={1} style={{width:'100%'}}/>
         </FormItem>
         <FormItem>
           <Select placeholder="Tipo da Atividade" defaultValue={type} onChange={value => setType(value)} size="large" value={type} showArrow={false} style={{width: '100%'}}>
@@ -94,7 +98,7 @@ const ModalEdit = ( ctask ) => {
           </Select>                
         </FormItem>
         <FormItem>
-          <TextArea placeholder="Descrição da Atividade" onChange={value => setDescription(value)} autoSize={{minRows:4, maxRows:6}}/>
+          <TextArea placeholder="Descrição da Atividade" defaultValue={description} onChange={e => setDescription(e.target.value)} autoSize={{minRows:4, maxRows:6}}/>
         </FormItem>
         <FormItem>
           <Button  disabled={!validateFields()} type="primary" size="large" onClick={handleSubmit} refresh="true">

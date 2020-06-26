@@ -33,7 +33,7 @@ export const TaskProvider = ({children}) => {
     return await axios.get(url)
     .then(result => {
       return result.data.data
-  });
+    });
   }
 
   async function setTask(task) {
