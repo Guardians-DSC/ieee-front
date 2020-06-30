@@ -17,26 +17,18 @@ const SideBar = () => {
       </div>
       <Menu theme='dark' mode='inline'>
         <SubMenu key='sub1' title = { <div> <Icon type="container"/> <span> Atividades </span> </div> }>
-          <Menu.Item key="1">
-            <Link to="/novaAtividade"> Cadastrar Atividade </Link>
-          </Menu.Item>
-          <Menu.Item key='2'>
-            <Link to="/"> Listar Atividades </Link>
-          </Menu.Item>
+          <Menu.Item key="1"> <Link to="/novaAtividade"> Cadastrar Atividade </Link> </Menu.Item>
+          <Menu.Item key='2'> <Link to="/"> Listar Atividades </Link> </Menu.Item>
         </SubMenu>
 
         <SubMenu key='sub2' title = { <div> <Icon type="user"/> <span> Membros </span> </div>}>
-          <Menu.Item key="4"   ick={null}>
-            <Link to="/novoMembro"> Cadastrar Membro </Link>
-          </Menu.Item>
-          <Menu.Item key='5'>
-            <Link to="/listarMembros"> Listar Membros </Link>
-          </Menu.Item>
+          <Menu.Item key="4"> <Link to="/novoMembro"> Cadastrar Membro </Link> </Menu.Item>
+          <Menu.Item key='5'> <Link to="/listarMembros"> Listar Membros </Link> </Menu.Item>
         </SubMenu>
 
         <SubMenu key='sub3' title = { <div> <Icon type="team"/> <span> Núcleos </span> </div> }>
-          <Menu.Item key="7">Vincular Membro a Núcleo</Menu.Item>
-          <Menu.Item key="8">Remover Membro de Núcleo</Menu.Item>
+          <Menu.Item key="6"> <Link to="/novoNucleo"> Cadastrar Núcleo </Link> </Menu.Item>
+          <Menu.Item key='7'> <Link to="/listarNucleos"> Listar Núcleos </Link> </Menu.Item>
         </SubMenu>
       </Menu>
     </Sider>

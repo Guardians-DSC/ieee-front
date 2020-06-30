@@ -6,8 +6,8 @@ import style from '../../../Style/Style'
 
 const { Meta } = Card;
 
-const MemberCard = ( cUser ) => {
-  const member = cUser.currentUser;
+const MemberCard = ( cMember ) => {
+  const member = cMember.currentUser;
 
   return (
     <React.Fragment>
@@ -15,6 +15,7 @@ const MemberCard = ( cUser ) => {
         <Card title={member.name} style={style.cardStyle}hoverable={true}>
           <Meta style={style.metaStyle} description={`Departamento: ${member.department}`}/>
           <Meta style={style.metaStyle} description={`Email: ${member.email}`}/>
+          <Meta style={style.metaStyle} description={`Usuário ativo: (implementar)`}/>
         </Card>
       </Col>
     </React.Fragment>

@@ -18,7 +18,6 @@ const Register = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   
   const handleSubmit = () => {
-    console.log(name, email, password, departament, isAdmin);
     addUser ({
       name: name,
       email: email,
