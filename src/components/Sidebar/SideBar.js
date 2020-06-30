@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
-import style from './SidebarStyle'
+import style from '../../Style/Style'
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -28,6 +28,9 @@ const SideBar = () => {
         <SubMenu key='sub2' title = { <div> <Icon type="user"/> <span> Membros </span> </div>}>
           <Menu.Item key="4"   ick={null}>
             <Link to="/novoMembro"> Cadastrar Membro </Link>
+          </Menu.Item>
+          <Menu.Item key='5'>
+            <Link to="/listarMembros"> Listar Membros </Link>
           </Menu.Item>
         </SubMenu>
 

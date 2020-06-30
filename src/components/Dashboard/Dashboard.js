@@ -8,7 +8,7 @@ import TaskCard from '../Task/TaskCard/TaskCard';
 import Sidebar from '../Sidebar/SideBar';
 import 'antd/dist/antd.css';
 
-import style from './DashboardStyle'
+import style from '../../Style/Style'
 
 const Dashboard = () => {
   const { getAllTasks } = useContext(TaskContext);

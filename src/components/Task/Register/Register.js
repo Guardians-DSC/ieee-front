@@ -6,7 +6,7 @@ import SideBar from '../../Sidebar/SideBar';
 import fieldsValidator from '../../../Utils/fieldsValidator';
 import { TaskContext } from '../../../storage/context/TaskContext';
 
-import style from './RegisterStyle'
+import style from '../../../Style/Style'
 
 const { TextArea } = Input;
 const { Option } = Select;
