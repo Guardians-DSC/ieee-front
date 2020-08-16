@@ -64,6 +64,7 @@ const Register = () => {
 
   const validateFields = () => {
     const isNameValid        = !isUndefinedField(name)        && !isEmptyField(name);
+    const isNucleValid       = !isUndefinedField(nucle)       && !isEmptyField(nucle);
     const isTypeValid        = !isUndefinedField(type)        && !isEmptyField(type);
     const isWorkloadValid    = !isUndefinedField(workload)    && !isEmptyField(workload);
     const isIntialDateValid  = !isUndefinedField(initialDate) && !isEmptyField(initialDate);
@@ -73,7 +74,7 @@ const Register = () => {
     const isDescriptionValid = !isUndefinedField(description) && !isEmptyField(description);
     
     return (
-      isNameValid && isTypeValid && isWorkloadValid && isIntialDateValid &&
+      isNameValid && isNucleValid && isTypeValid && isWorkloadValid && isIntialDateValid &&
       isFinalDateValid && isStartTimeValid && isClosingTimeValid && isDescriptionValid
     );
   }
@@ -87,7 +88,7 @@ const Register = () => {
           <Input placeholder="Nome da Nova Atividade" onChange={e => setName(e.target.value)} size="large" allowClear />
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Select placeholder="Núcleo a qual pertence a atividade" onChange={value => setNucle(value)} size="large" value={type} showArrow={false} style={{width: '100%'}}>
+          <Select placeholder="Núcleo a qual pertence a atividade" onChange={value => setNucle(value)} size="large" value={nucle} showArrow={false} style={{width: '100%'}}>
             {NucleOptions}
           </Select>
         </Col>

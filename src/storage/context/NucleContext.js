@@ -16,7 +16,6 @@ export const NucleProvider = ({children}) => {
   function addNucle(nucle) {
     _addNucle(nucle)
     .then(result => {
-      console.log(result.data.data);
       setNucleState({ response: result.status, nucles: result.data.data });
     })
     .catch(error => {
@@ -29,7 +28,6 @@ export const NucleProvider = ({children}) => {
   function getNucle(nucleName) {
     _getNucle(nucleName)
     .then(result => {
-      console.log(result.data.data);
       setNucleState({ ...initialState, response: result.status, cNucle: result.data.data });
     })
     .catch(error => {
@@ -46,14 +44,13 @@ export const NucleProvider = ({children}) => {
     .catch(error => {
       setNucleState({ response: error, nucles: [] });
     });
-
+    
     return nucleState;
   }
 
   function setNucle(nucle) {
     _setNucle(nucle)
     .then(result => {
-      console.log(result.data.data);
       setNucleState({ ...initialState, response: result.status, cNucle: result.data.data });
     })
     .catch(error => {
@@ -64,16 +61,16 @@ export const NucleProvider = ({children}) => {
   }
 
   function deleteNucle(nucleName) {
-    _setNucle(nucleName)
+    _deleteNucle(nucleName)
     .then(result => {
-      console.log(result.data.data);
       setNucleState({ ...initialState, response: result.status });
     })
     .catch(error => {
       setNucleState({ ...initialState, response: error });
     });
 
-    return nucleState;  }
+    return nucleState;  
+  }
 
   return (
     <NucleContext.Provider value = {{addNucle, getNucle, getAllNucles, setNucle, deleteNucle}}>
