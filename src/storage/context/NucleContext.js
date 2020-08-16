@@ -1,45 +1,79 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-import axios from 'axios';
-
-const url = 'http://localhost:8080/nucle/';
+import {_addNucle, _getNucle, _getAllNucles, _setNucle, _deleteNucle} from '../actions/NucleActions'
 
 export const NucleContext = createContext(null);
 
+const initialState = {
+  nucles: [],     //All nucles
+  cNucle: null,   //Current Nucle
+  response: null  //Backend response
+};
+
 export const NucleProvider = ({children}) => {
+  const [nucleState, setNucleState] = useState(initialState);
 
-  async function addNucle(nucle) {
-    return await axios.post(url, {
-      name: nucle.name
-    });
-  }
-
-  async function getNucle(nucleName) {
-    return await axios.get(`${url}/${nucleName}`)
-    .then(function (resp) {
-      return resp.data.data;
-    });
-  }
-
-  async function getAllNucles() {
-    return await axios.get(url)
+  function addNucle(nucle) {
+    _addNucle(nucle)
     .then(result => {
-      return result.data.data
-  });
-  }
-
-  async function setNucle(nucle) {
-    return await axios.put(`${url}/${nucle.name}`, {
-      name: nucle.name,
+      console.log(result.data.data);
+      setNucleState({ response: result.status, nucles: result.data.data });
+    })
+    .catch(error => {
+      setNucleState({ response: error, nucles: [] });
     });
+
+    return nucleState;
   }
 
-  async function deleteNucle(nucleName) {
-    return await axios.delete(`${url}/${nucleName}`)
+  function getNucle(nucleName) {
+    _getNucle(nucleName)
     .then(result => {
-      return result.data.data
+      console.log(result.data.data);
+      setNucleState({ ...initialState, response: result.status, cNucle: result.data.data });
+    })
+    .catch(error => {
+      setNucleState({ ...initialState, response: error, cNucle: null });
     });
+
+    return nucleState;
   }
+
+  function getAllNucles() {
+    _getAllNucles()
+    .then(result => { setNucleState({ response: result.status, nucles: result.data.data });
+    })
+    .catch(error => {
+      setNucleState({ response: error, nucles: [] });
+    });
+
+    return nucleState;
+  }
+
+  function setNucle(nucle) {
+    _setNucle(nucle)
+    .then(result => {
+      console.log(result.data.data);
+      setNucleState({ ...initialState, response: result.status, cNucle: result.data.data });
+    })
+    .catch(error => {
+      setNucleState({ ...initialState, response: error, cNucle: null });
+    });
+
+    return nucleState;
+  }
+
+  function deleteNucle(nucleName) {
+    _setNucle(nucleName)
+    .then(result => {
+      console.log(result.data.data);
+      setNucleState({ ...initialState, response: result.status });
+    })
+    .catch(error => {
+      setNucleState({ ...initialState, response: error });
+    });
+
+    return nucleState;  }
 
   return (
     <NucleContext.Provider value = {{addNucle, getNucle, getAllNucles, setNucle, deleteNucle}}>
