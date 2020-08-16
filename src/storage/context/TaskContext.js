@@ -1,60 +1,77 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-import axios from 'axios';
-
-const url = 'http://localhost:8080/task/';
+import {_addTask, _getTask, _getAllTasks, _setTask, _deleteTask} from '../actions/TaskActions'
 
 export const TaskContext = createContext(null);
 
+const initialState = {
+  tasks: [],      //All tasks
+  cTask: null,    //Current task
+  response: null  //Backend response
+};
+
 export const TaskProvider = ({children}) => {
+  const [taskState, setTaskState] = useState(initialState);
 
   async function addTask(task) {
-    return await axios.post(url, {
-      name: task.name,
-      type: task.type,
-      description: task.description,
-      initialDate: task.initialDate,
-      finalDate:task.finalDate,
-      startTime:task.startTime,
-      closingTime: task.closingTime,
-      workload: task.workload,
-      nucle:task.nucle
-    });
-  }
-
-  async function getTask(taskID) {
-    return await axios.get(`${url}/${taskID}`)
-    .then(function (resp) {
-      return resp.data.data;
-    });
-  }
-
-  async function getAllTasks() {
-    return await axios.get(url)
+    _addTask(task)
     .then(result => {
-      return result.data.data
+      setTaskState({ ...initialState, cTask: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setTaskState({ tasks: [], cTask: null, response: error });
     });
+
+    return taskState;
   }
 
-  async function setTask(task) {
-    return await axios.put(`${url}/${task._id}`, {
-      name: task.name,
-      type: task.type,
-      description: task.description,
-      initialDate: task.initialDate,
-      finalDate:task.finalDate,
-      startTime:task.startTime,
-      closingTime: task.closingTime,
-      workload: task.workload,
-      nucle:task.nucle
-    });
-  }
-
-  async function deleteTask(taskID) {
-    return await axios.delete(`${url}/${taskID}`)
+  function getTask(taskID) {
+    _getTask(taskID)
     .then(result => {
-      return result.data.data
+      setTaskState({ ...initialState, cTask: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setTaskState({ tasks: [], cTask: null, response: error });
     });
+
+    return taskState;
+  }
+
+  function getAllTasks() {
+    _getAllTasks()
+    .then(result => {
+      setTaskState({ ...initialState, tasks: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setTaskState({ tasks: [], cTask: null, response: error });
+    });
+
+    return taskState;
+  }
+
+  function setTask(task) {
+    _setTask(task)
+    .then(result => {
+      setTaskState({ ...initialState, cTask: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setTaskState({ tasks: [], cTask: null, response: error });
+    });
+
+    return taskState;
+  }
+
+  function deleteTask(taskID) {
+    _deleteTask(taskID)
+    .then(result => {
+      setTaskState({ ...initialState, response: result.status}); 
+      _getAllTasks().then(r => setTaskState({ ...initialState, tasks: r.data.data}));
+    })
+    .catch(error => {
+      setTaskState({ tasks: [], cTask: null, response: error });
+    });
+
+    return taskState;
   }
 
   return (

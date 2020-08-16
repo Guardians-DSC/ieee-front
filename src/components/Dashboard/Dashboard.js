@@ -15,12 +15,9 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchTasks = await getAllTasks();
+      const fetchTasks = getAllTasks().tasks;
       setTasks(fetchTasks);
       renderCard(fetchTasks);
-    }
-    fetchData();
   }, [tasks, getAllTasks]);
 
   const renderCard = (tasks) => {
