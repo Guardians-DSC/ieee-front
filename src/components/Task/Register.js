@@ -2,12 +2,12 @@ import React from 'react';
 import { useState, useContext } from 'react';
 import { Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
 
-import SideBar from '../../Sidebar/SideBar';
-import fieldsValidator from '../../../Utils/fieldsValidator';
-import { TaskContext } from '../../../storage/context/TaskContext';
-import { NucleContext } from '../../../storage/context/NucleContext';
+import SideBar from '../Sidebar/SideBar';
+import fieldsValidator from '../../Utils/fieldsValidator';
+import { TaskContext } from '../../storage/context/TaskContext';
+import { NucleContext } from '../../storage/context/NucleContext';
 
-import style from '../../../Style/Style'
+import style from '../../Style/Style'
 
 const { TextArea } = Input;
 const { Option } = Select;

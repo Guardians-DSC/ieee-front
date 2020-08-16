@@ -3,7 +3,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import './App.css';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import TaskRegister from './components/Task/Register/Register';
+import TaskRegister from './components/Task/Register';
 import MemberRegister from './components/Member/Register';
 import ListMembers from './components/Member/ListMembers';
 import NucleRegister from './components/Nucle/Register';
