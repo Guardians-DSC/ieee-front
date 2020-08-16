@@ -14,12 +14,9 @@ const ListMembers = () => {
   const [users, setUsers] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchUsers = await getAllUsers();
-      setUsers(fetchUsers);
-      renderCard(fetchUsers);
-    }
-    fetchData();
+    const fetchUsers = getAllUsers().users;
+    setUsers(fetchUsers);
+    renderCard(fetchUsers);
   }, [users, getAllUsers]);
 
   const renderCard = (users) => {
