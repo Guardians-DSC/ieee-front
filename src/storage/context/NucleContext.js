@@ -16,10 +16,11 @@ export const NucleProvider = ({children}) => {
   function addNucle(nucle) {
     _addNucle(nucle)
     .then(result => {
-      setNucleState({ response: result.status, nucles: result.data.data });
+      console.log(result.data.data)
+      setNucleState({ ...initialState, cNucle: result.data.data, response: result.status });
     })
     .catch(error => {
-      setNucleState({ response: error, nucles: [] });
+      setNucleState({ nucles: [], cNucle: null, response: error });
     });
 
     return nucleState;
@@ -28,10 +29,11 @@ export const NucleProvider = ({children}) => {
   function getNucle(nucleName) {
     _getNucle(nucleName)
     .then(result => {
-      setNucleState({ ...initialState, response: result.status, cNucle: result.data.data });
+      console.log(result);
+      setNucleState({ ...initialState, cNucle: result.data.data, response: result.status });
     })
     .catch(error => {
-      setNucleState({ ...initialState, response: error, cNucle: null });
+      setNucleState({ nucles: [], cNucle: null, response: error });
     });
 
     return nucleState;
@@ -39,10 +41,11 @@ export const NucleProvider = ({children}) => {
 
   function getAllNucles() {
     _getAllNucles()
-    .then(result => { setNucleState({ response: result.status, nucles: result.data.data });
+    .then(result => {
+      setNucleState({ ...initialState, nucles: result.data.data, response: result.status });
     })
     .catch(error => {
-      setNucleState({ response: error, nucles: [] });
+      setNucleState({ nucles: [], cNucle: null, response: error });
     });
     
     return nucleState;
@@ -51,10 +54,10 @@ export const NucleProvider = ({children}) => {
   function setNucle(nucle) {
     _setNucle(nucle)
     .then(result => {
-      setNucleState({ ...initialState, response: result.status, cNucle: result.data.data });
+      setNucleState({ ...initialState, cNucle: result.data.data, response: result.status });
     })
     .catch(error => {
-      setNucleState({ ...initialState, response: error, cNucle: null });
+      setNucleState({ nucles: [], cNucle: null, response: error });
     });
 
     return nucleState;
@@ -63,10 +66,12 @@ export const NucleProvider = ({children}) => {
   function deleteNucle(nucleName) {
     _deleteNucle(nucleName)
     .then(result => {
-      setNucleState({ ...initialState, response: result.status });
+      setNucleState({ ...initialState, response: result.status}); 
+      _getAllNucles().then(r => setNucleState({ ...initialState, nucles: r.data.data}));
+      setNucleState({ ...initialState, cNucle: result.data.data, response: result.status });
     })
     .catch(error => {
-      setNucleState({ ...initialState, response: error });
+      setNucleState({ nucles: [], cNucle: null, response: error });
     });
 
     return nucleState;  

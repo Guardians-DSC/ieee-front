@@ -14,12 +14,9 @@ const ListNucles = () => {
   const [nucles, setNucles] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchNucles = await getAllNucles();
-      setNucles(fetchNucles);
-      renderCard(fetchNucles);
-    }
-    fetchData();
+    const fetchNucles = getAllNucles().nucles;
+    setNucles(fetchNucles);
+    renderCard(fetchNucles);
   }, [nucles, getAllNucles]);
 
   const renderCard = (nucles) => {
