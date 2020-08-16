@@ -7,7 +7,7 @@ import formatData from '../../../Utils/formatData';
 import PopupEdit from './TaskPopupEdit/PopupEdit';
 import PopupDelete from './TaskPopupDelete/PopupDelete';
 
-import style from './TaskCardStyle'
+import style from '../../../Style/Style'
 
 const { Meta } = Card;
 

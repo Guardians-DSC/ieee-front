@@ -4,7 +4,8 @@ import {useState, useContext} from 'react';
 import { Col, Input, Select, Button } from 'antd';import 'antd/dist/antd.css';
 import { UserContext } from '../../storage/context/UserContext';
 import SideBar from '../Sidebar/SideBar';
-import style from './RegisterStyle'
+
+import style from '../../Style/Style'
 
 const { Option } = Select;
 
@@ -46,21 +47,21 @@ const Register = () => {
       <div style={style.input}>
         <Col span={13} offset={4} style={style.inputHeader}> CADASTRO DE MEBRO </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Input placeholder="Nome do Novo Membro" onChange={value => setName(value)} size="large" allowClear />
+          <Input placeholder="Nome do Novo Membro" onChange={e => setName(e.target.value)} size="large" allowClear />
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Input placeholder="Email" onChange={value => setEmail(value)} size="large" allowClear />
+          <Input placeholder="Email" onChange={e => setEmail(e.target.value)} size="large" tyoe='email' allowClear />
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Input placeholder="Senha" onChange={value => setPassword(value)} size="large" allowClear />
+          <Input placeholder="Senha" onChange={e => setPassword(e.target.value)} size="large" type='password' allowClear />
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Input placeholder="Departament" onChange={value => setDepartament(value)} size="large" allowClear />
+          <Input placeholder="Departament" onChange={e => setDepartament(e.target.value)} size="large" allowClear />
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Select placeholder="Cadastrar como administrador" size="large" onChange={value =>setIsAdmin(value)} showArrow={true} style={{width: '100%'}}>
-            <Option value={true} key={1}> {'Sim'} </Option>
-            <Option value={false} key={0}> {'Não'} </Option>
+          <Select placeholder="Cadastrar como administrador" size="large" onChange={value =>setIsAdmin(value === 'true')} showArrow={true} style={{width: '100%'}}>
+            <Option value={'false'} key={0}> {'Não'} </Option>
+            <Option value={'true'} key={1}> {'Sim'} </Option>
           </Select>  
         </Col>
         <Col span={6} offset={4} style={style.item}>

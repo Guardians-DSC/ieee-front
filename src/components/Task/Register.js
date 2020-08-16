@@ -2,11 +2,12 @@ import React from 'react';
 import { useState, useContext } from 'react';
 import { Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
 
-import SideBar from '../../Sidebar/SideBar';
-import fieldsValidator from '../../../Utils/fieldsValidator';
-import { TaskContext } from '../../../storage/context/TaskContext';
+import SideBar from '../Sidebar/SideBar';
+import fieldsValidator from '../../Utils/fieldsValidator';
+import { TaskContext } from '../../storage/context/TaskContext';
+import { NucleContext } from '../../storage/context/NucleContext';
 
-import style from './RegisterStyle'
+import style from '../../Style/Style'
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -26,7 +27,23 @@ const Register = () => {
   const [startTime, setStartTime] = useState();
   const [closingTime, setClosingTime] = useState();
   const [description, setDescription] = useState();
-              
+  
+  //Create a nucle names options list
+  const { getAllNucles } = useContext(NucleContext);
+  const nucleList = getAllNucles().nucles;
+  const NucleOptions = nucleList.map(
+    (nucleList, index) => (
+      <Option value={nucleList.name} key={index}> {nucleList.name} </Option>
+    )
+  );
+
+  //Create a task options list
+  const TaskOptions = taskTypes.map(
+    (taskType, index) => (
+      <Option value={taskType} key={index}> {taskType} </Option>
+    )
+  );
+
   const handleSubmit = () => {
     addTask ({
       name: name,
@@ -47,6 +64,7 @@ const Register = () => {
 
   const validateFields = () => {
     const isNameValid        = !isUndefinedField(name)        && !isEmptyField(name);
+    const isNucleValid       = !isUndefinedField(nucle)       && !isEmptyField(nucle);
     const isTypeValid        = !isUndefinedField(type)        && !isEmptyField(type);
     const isWorkloadValid    = !isUndefinedField(workload)    && !isEmptyField(workload);
     const isIntialDateValid  = !isUndefinedField(initialDate) && !isEmptyField(initialDate);
@@ -56,17 +74,11 @@ const Register = () => {
     const isDescriptionValid = !isUndefinedField(description) && !isEmptyField(description);
     
     return (
-      isNameValid && isTypeValid && isWorkloadValid && isIntialDateValid &&
+      isNameValid && isNucleValid && isTypeValid && isWorkloadValid && isIntialDateValid &&
       isFinalDateValid && isStartTimeValid && isClosingTimeValid && isDescriptionValid
     );
   }
   
-  const TaskOptions = taskTypes.map(
-    (taskType, index) => (
-      <Option value={taskType} key={index}> {taskType} </Option>
-    )
-  );
-
   return(
     <div style={style.container} >
       <SideBar/>
@@ -76,7 +88,9 @@ const Register = () => {
           <Input placeholder="Nome da Nova Atividade" onChange={e => setName(e.target.value)} size="large" allowClear />
         </Col>
         <Col span={13} offset={4} style={style.item}>
-          <Input placeholder="Núcleo a qual pertence a atividade" onChange={e => setNucle(e.target.value)} size="large" allowClear />
+          <Select placeholder="Núcleo a qual pertence a atividade" onChange={value => setNucle(value)} size="large" value={nucle} showArrow={false} style={{width: '100%'}}>
+            {NucleOptions}
+          </Select>
         </Col>
         <Col span={6} offset={4} style={style.item}>
           <DatePicker placeholder="Data De Inicio" onChange={value => setInitialDate(value)} format={dateFormat} size="large" style={{width:'100%'}} />

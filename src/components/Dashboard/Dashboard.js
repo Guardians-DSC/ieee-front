@@ -8,19 +8,16 @@ import TaskCard from '../Task/TaskCard/TaskCard';
 import Sidebar from '../Sidebar/SideBar';
 import 'antd/dist/antd.css';
 
-import style from './DashboardStyle'
+import style from '../../Style/Style'
 
 const Dashboard = () => {
   const { getAllTasks } = useContext(TaskContext);
   const [tasks, setTasks] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchTasks = await getAllTasks();
+      const fetchTasks = getAllTasks().tasks;
       setTasks(fetchTasks);
       renderCard(fetchTasks);
-    }
-    fetchData();
   }, [tasks, getAllTasks]);
 
   const renderCard = (tasks) => {

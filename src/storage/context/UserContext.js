@@ -1,52 +1,77 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-import axios from 'axios';
-
-const url = 'http://localhost:8080/user/';
+import {_addUser, _getUser, _getAllUsers, _setUser, _deleteUser} from '../actions/UserActions'
 
 export const UserContext = createContext(null);
 
+const initialState = {
+  users: [],      //All users
+  cUser: null,    //Current user
+  response: null  //Backend response
+};
+
 export const UserProvider = ({children}) => {
+  const [userState, setUserState] = useState(initialState);
 
   async function addUser(user) {
-    return await axios.post(url, {
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      isAdmin: user.isAdmin,
-      department: user.department,
-    });
-  }
-
-  async function getUser(userEmail) {
-    return await axios.get(`${url}/${userEmail}`)
-    .then(function (resp) {
-      return resp.data.data;
-    });
-  }
-
-  async function getAllUsers() {
-    return await axios.get(url)
+    _addUser(user)
     .then(result => {
-      return result.data.data
-  });
-  }
-
-  async function setUser(user) {
-    return await axios.put(`${url}/${user.email}`, {
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      isAdmin: user.isAdmin,
-      department: user.department
+      setUserState({ ...initialState, cUser: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setUserState({ users: [], cUser: null, response: error });
     });
+
+    return userState;
   }
 
-  async function deleteUser(userEmail) {
-    return await axios.delete(`${url}/${userEmail}`)
+  function getUser(userID) {
+    _getUser(userID)
     .then(result => {
-      return result.data.data
+      setUserState({ ...initialState, cUser: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setUserState({ users: [], cUser: null, response: error });
     });
+
+    return userState;
+  }
+
+  function getAllUsers() {
+    _getAllUsers()
+    .then(result => {
+      setUserState({ ...initialState, users: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setUserState({ users: [], cUser: null, response: error });
+    });
+
+    return userState;
+  }
+
+  function setUser(user) {
+    _setUser(user)
+    .then(result => {
+      setUserState({ ...initialState, cUser: result.data.data, response: result.status });
+    })
+    .catch(error => {
+      setUserState({ users: [], cUser: null, response: error });
+    });
+
+    return userState;
+  }
+
+  function deleteUser(userID) {
+    _deleteUser(userID)
+    .then(result => {
+      setUserState({ ...initialState, response: result.status}); 
+      _getAllUsers().then(r => setUserState({ ...initialState, users: r.data.data}));
+    })
+    .catch(error => {
+      setUserState({ users: [], cUser: null, response: error });
+    });
+
+    return userState;
   }
 
   return (
