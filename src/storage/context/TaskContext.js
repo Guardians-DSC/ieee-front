@@ -13,7 +13,7 @@ const initialState = {
 export const TaskProvider = ({children}) => {
   const [taskState, setTaskState] = useState(initialState);
 
-  async function addTask(task) {
+  function addTask(task) {
     _addTask(task)
     .then(result => {
       setTaskState({ ...initialState, cTask: result.data.data, response: result.status });

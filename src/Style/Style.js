@@ -69,7 +69,11 @@ const style = {
     width: '100%',
     height: '100%',
     alignSelf: 'flex-start',
-    overflowY:'auto'
+    overflowY:'auto',
+  },
+  
+  item: {
+    marginBottom: '2rem',
   },
   
   input: {
@@ -78,10 +82,6 @@ const style = {
     width : '90%',
     paddingTop: '12rem',
     height: '100vh',      
-  },
-
-  item: {
-    marginBottom: '2rem',
   },
 
   inputHeader: {

@@ -21,9 +21,8 @@ const Dashboard = () => {
   }, [tasks, getAllTasks]);
 
   const renderCard = (tasks) => {
-    if (tasks !== undefined) {
+    if (tasks !== undefined) 
       return tasks.map((task,index) => <TaskCard currentask={task} key={index} />);
-    }
   }
 
   return (

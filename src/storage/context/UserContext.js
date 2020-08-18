@@ -5,15 +5,16 @@ import {_addUser, _getUser, _getAllUsers, _setUser, _deleteUser} from '../action
 export const UserContext = createContext(null);
 
 const initialState = {
-  users: [],      //All users
-  cUser: null,    //Current user
-  response: null  //Backend response
+  users: [],        //All users
+  cUser: null,      //Current user
+  response: null,   //Backend response
+  token: localStorage.getItem('userToken')
 };
 
 export const UserProvider = ({children}) => {
   const [userState, setUserState] = useState(initialState);
 
-  async function addUser(user) {
+  function addUser(user) {
     _addUser(user)
     .then(result => {
       setUserState({ ...initialState, cUser: result.data.data, response: result.status });

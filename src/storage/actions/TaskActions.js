@@ -4,7 +4,11 @@ const url = 'http://localhost:8080/task/';
 
 export function _addTask(task) {
   return new Promise((resolve, reject) => {
-    axios.post(url, task)
+    axios.post(url, task,
+      { headers : {
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+      }
+    })
     .then(result => {
       resolve(result);
     })
@@ -16,7 +20,11 @@ export function _addTask(task) {
 
 export function _getTask(taskID) {
   return new Promise((resolve, reject) => {
-    axios.get(`${url}/${taskID}`)
+    axios.get(`${url}/${taskID}`,
+      { headers : {
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+      }
+    })
     .then(result => {
       resolve(result);
     })
@@ -28,7 +36,11 @@ export function _getTask(taskID) {
 
 export function _getAllTasks() {
   return new Promise((resolve, reject) => {
-    axios.get(url)
+    axios.get(url,
+      { headers : {
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+      }
+    })
     .then(result => {
       resolve(result);
     })
@@ -40,7 +52,11 @@ export function _getAllTasks() {
 
 export function _setTask(task) {
   return new Promise((resolve, reject) => {
-    axios.put(`${url}/${task._id}`, task)
+    axios.put(`${url}/${task._id}`, task,
+      { headers : {
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+      }
+    })
     .then(result => {
       resolve(result);
     })
@@ -52,7 +68,11 @@ export function _setTask(task) {
 
 export function _deleteTask(taskID) {
   return new Promise((resolve, reject) => {
-    axios.delete(`${url}/${taskID}`)
+    axios.delete(`${url}/${taskID}`,
+      { headers : {
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+      }
+    })
     .then(result => {
       if (result.status !== Response.error)
         resolve(result);
