@@ -1,11 +1,11 @@
 import React, { createContext, useState } from 'react';
 import {_checkToken, _logIn} from '../actions/SignInActions'
 
-const token = localStorage.getItem('T0ken');
 
 export const SignInContext = createContext(null);
 
 export const SignInProvider = ({children}) => {
+  const token = localStorage.getItem('T0ken');
   const [signInState, setSignInState] = useState(!!token);
   
 
