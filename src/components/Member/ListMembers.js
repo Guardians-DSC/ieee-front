@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect, useContext} from 'react';
+import {useContext} from 'react';
 import {Row} from 'antd';
 
 import { UserContext } from '../../storage/context/UserContext';
@@ -11,13 +11,6 @@ import style from '../../Style/Style'
 
 const ListMembers = () => {
   const { getAllUsers } = useContext(UserContext);
-  const [users, setUsers] = useState();
-
-  useEffect(() => {
-    const fetchUsers = getAllUsers().users;
-    setUsers(fetchUsers);
-    renderCard(fetchUsers);
-  }, [users, getAllUsers]);
 
   const renderCard = (users) => {
     if (users !== undefined) {
@@ -30,7 +23,7 @@ const ListMembers = () => {
       <Sidebar/>
       <div style={style.scrollContainer}>
         <Row gutter={{xs:4, sm:16}} style={style.rowStyle}>
-          {renderCard(users)}
+          {renderCard(getAllUsers().users)}
         </Row>
       </div>
     </div>

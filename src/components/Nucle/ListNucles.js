@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect, useContext} from 'react';
+import {useContext} from 'react';
 import {Row} from 'antd';
 
 import { NucleContext } from '../../storage/context/NucleContext';
@@ -11,13 +11,6 @@ import style from '../../Style/Style'
 
 const ListNucles = () => {
   const { getAllNucles } = useContext(NucleContext);
-  const [nucles, setNucles] = useState();
-
-  useEffect(() => {
-    const fetchNucles = getAllNucles().nucles;
-    setNucles(fetchNucles);
-    renderCard(fetchNucles);
-  }, [nucles, getAllNucles]);
 
   const renderCard = (nucles) => {
     if (nucles !== undefined) {
@@ -30,7 +23,7 @@ const ListNucles = () => {
       <Sidebar/>
       <div style={style.scrollContainer}>
         <Row gutter={{xs:4, sm:16}} style={style.rowStyle}>
-          {renderCard(nucles)}
+          {renderCard(getAllNucles().nucles)}
         </Row>
       </div>
     </div>

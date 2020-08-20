@@ -11,9 +11,11 @@ export function _addNucle(nucle) {
       }
     })
     .then(result => {
+      console.log('aqui0000000000000')
       resolve(result);
     })
     .catch(error => {
+      console.log('aqui')
       reject(error);
     })
   });
