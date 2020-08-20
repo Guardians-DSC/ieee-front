@@ -54,7 +54,7 @@ export function _getAllNucles() {
 export function _setNucle(nucle) {
   return new Promise((resolve, reject) => {
     axios.put(`${url}/${nucle.name}`, 
-      { name: nucle.name }, 
+      { name: nucle.newName }, 
       { headers : {
         'Authorization': `Bearer ${localStorage.getItem('userToken')}`
       }

@@ -72,7 +72,7 @@ const ModalEdit = ( ctask ) => {
     <Card>
       <Form layout="vertical" onSubmit={handleSubmit}>
         <FormItem>
-          <Input placeholder="Nome da Nova Atividade" defaultValue={name} onChange={e => setName(e.target.value)} size="large" allowClear />
+          <Input placeholder="Nome da Atividade" defaultValue={name} onChange={e => setName(e.target.value)} size="large" allowClear />
         </FormItem>
         <FormItem>
           <Input placeholder="Núcleo a qual pertence a atividade" defaultValue={nucle} onChange={e => setNucle(e.target.value)} size="large" allowClear />
