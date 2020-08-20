@@ -11,7 +11,7 @@ const PopupEdit = e => {
     <div>
       <Modal 
         visible={true}
-        title="Atualizar Atividade"
+        title="Atualizar Núcleo"
         onOk={e.onClose}
         onCancel={e.onClose}
         style={{top:'5rem'}}
@@ -21,7 +21,7 @@ const PopupEdit = e => {
           </Button>
           }
         >
-          <ModalEdit task={e.task}/>
+          <ModalEdit nucle={e.nucle}/>
       </Modal>
     </div>
   )

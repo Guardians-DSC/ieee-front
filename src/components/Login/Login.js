@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { Col, Input, Button } from 'antd';
 
 import fieldsValidator from '../../Utils/fieldsValidator';
-import { useSignDataContext } from '../../storage/context/SingInContext';
-
 import style  from '../../Style/Style'
+
+import { useSignDataContext } from '../../storage/context/SingInContext';
 
 const Login = () => {  
   const [email, setEmail] = useState();

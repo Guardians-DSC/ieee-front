@@ -1,16 +1,17 @@
 import React from 'react';
-import fieldsValidator from '../../Utils/fieldsValidator';
-import {useState, useContext} from 'react';
+import {useState } from 'react';
 import { Col, Input, Select, Button } from 'antd';import 'antd/dist/antd.css';
-import { UserContext } from '../../storage/context/UserContext';
-import SideBar from '../Sidebar/SideBar';
 
+import fieldsValidator from '../../Utils/fieldsValidator';
+import SideBar from '../Sidebar/SideBar';
 import style from '../../Style/Style'
+
+import { useUserDataContext } from '../../storage/context/UserContext';
 
 const { Option } = Select;
 
 const Register = () => {
-  const { addUser } = useContext(UserContext);
+  const { addUser } = useUserDataContext();
   const [name, setName] = useState();
   const [email, setEmail] = useState();   
   const [password, setPassword] = useState();

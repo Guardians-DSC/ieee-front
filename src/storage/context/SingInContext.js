@@ -27,14 +27,20 @@ const SignInProvider = ({children}) => {
     .catch(error => {
       localStorage.setItem('T0ken', null);
       setSignInState(false);
-      window.alert('Falha ao logar.')
+
+      if(error.toString().includes('404'))
+        window.alert('Usuário não cadastrado.');
+      else if(error.toString().includes('400'))
+        window.alert('Senha inválida.');
+
+      console.log(error);
     });
   }
 
   function logOut() {
     localStorage.setItem('T0ken', null);
     setSignInState(false);
- }
+  }
 
   const signInStateData = ({isSignedIn: signInState, logIn, logOut, checkToken}); 
 

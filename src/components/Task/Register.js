@@ -1,13 +1,13 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Col, Input, Select, TimePicker, InputNumber, DatePicker, Button } from 'antd';
 
-import SideBar from '../Sidebar/SideBar';
 import fieldsValidator from '../../Utils/fieldsValidator';
-import { TaskContext } from '../../storage/context/TaskContext';
-import { NucleContext } from '../../storage/context/NucleContext';
-
+import SideBar from '../Sidebar/SideBar';
 import style from '../../Style/Style'
+
+import { useTaskDataContext } from '../../storage/context/TaskContext';
+import { useNucleDataContext } from '../../storage/context/NucleContext';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -17,7 +17,7 @@ const timeFormat = 'HH:mm';
 const dateFormat = 'DD-MM-YYYY';
 
 const Register = () => {
-  const { addTask } = useContext(TaskContext);
+  const { addTask } = useTaskDataContext();
   const [name, setName] = useState();
   const [nucle, setNucle] = useState();
   const [type, setType] = useState();
@@ -29,9 +29,8 @@ const Register = () => {
   const [description, setDescription] = useState();
   
   //Create a nucle names options list
-  const { getAllNucles } = useContext(NucleContext);
-  const nucleList = getAllNucles().nucles;
-  const NucleOptions = nucleList.map(
+  const { getAllNucles, nucles } = useNucleDataContext();
+  const NucleOptions = nucles.map(
     (nucleList, index) => (
       <Option value={nucleList.name} key={index}> {nucleList.name} </Option>
     )
@@ -89,6 +88,7 @@ const Register = () => {
         </Col>
         <Col span={13} offset={4} style={style.item}>
           <Select placeholder="Núcleo a qual pertence a atividade" onChange={value => setNucle(value)} size="large" value={nucle} showArrow={false} style={{width: '100%'}}>
+            {getAllNucles()} 
             {NucleOptions}
           </Select>
         </Col>

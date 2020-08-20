@@ -1,82 +1,80 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 import {_addTask, _getTask, _getAllTasks, _setTask, _deleteTask} from '../actions/TaskActions'
 
 export const TaskContext = createContext(null);
+export const useTaskDataContext = () => useContext(TaskContext);
 
 const initialState = {
   tasks: [],      //All tasks
   cTask: null,    //Current task
-  response: null  //Backend response
 };
 
-export const TaskProvider = ({children}) => {
+const TaskProvider = ({children}) => {
   const [taskState, setTaskState] = useState(initialState);
 
   function addTask(task) {
     _addTask(task)
     .then(result => {
-      setTaskState({ ...initialState, cTask: result.data.data, response: result.status });
+      setTaskState({ ...taskState, cTask: result.data.data });
     })
     .catch(error => {
-      setTaskState({ tasks: [], cTask: null, response: error });
+      setTaskState(initialState);
+      console.log(error);
     });
-
-    return taskState;
   }
 
   function getTask(taskID) {
     _getTask(taskID)
     .then(result => {
-      setTaskState({ ...initialState, cTask: result.data.data, response: result.status });
+      setTaskState({ ...taskState, cTask: result.data.data });
     })
     .catch(error => {
-      setTaskState({ tasks: [], cTask: null, response: error });
+      setTaskState(initialState);
+      console.log(error);
     });
-
-    return taskState;
   }
 
   function getAllTasks() {
     _getAllTasks()
     .then(result => {
-      setTaskState({ ...initialState, tasks: result.data.data, response: result.status });
+      setTaskState({ ...taskState, tasks: result.data.data });
     })
     .catch(error => {
-      setTaskState({ tasks: [], cTask: null, response: error });
+      setTaskState(initialState);
+      console.log(error);
     });
-
-    return taskState;
   }
 
   function setTask(task) {
     _setTask(task)
     .then(result => {
-      setTaskState({ ...initialState, cTask: result.data.data, response: result.status });
+      setTaskState({ ...taskState, cTask: result.data.data });
     })
     .catch(error => {
-      setTaskState({ tasks: [], cTask: null, response: error });
+      setTaskState(initialState);
+      console.log(error);
     });
-
-    return taskState;
   }
 
   function deleteTask(taskID) {
     _deleteTask(taskID)
-    .then(result => {
-      setTaskState({ ...initialState, response: result.status}); 
-      _getAllTasks().then(r => setTaskState({ ...initialState, tasks: r.data.data}));
+    .then(() => {
+      _getAllTasks().then(result => setTaskState({ ...initialState, tasks: result.data.data}));
     })
     .catch(error => {
-      setTaskState({ tasks: [], cTask: null, response: error });
+      setTaskState(initialState);
+      console.log(error);
     });
-
-    return taskState;
   }
 
+  const taskStateData = ({...taskState, addTask, getTask, getAllTasks, setTask, deleteTask}); 
+
   return (
-    <TaskContext.Provider value = {{addTask, getTask, getAllTasks, setTask, deleteTask}}>
+    <TaskContext.Provider value = {taskStateData}>
       {children}
     </TaskContext.Provider>
   );
 }
+
+export default TaskProvider;
