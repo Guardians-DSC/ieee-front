@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
-import Dashboard from './components/Dashboard/Dashboard';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './App.css';
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useSignDataContext } from '../src/storage/context/SingInContext';
+
+import Dashboard from './components/Dashboard/Dashboard';
 import TaskRegister from './components/Task/Register';
 import MemberRegister from './components/Member/Register';
 import ListMembers from './components/Member/ListMembers';
@@ -10,24 +12,22 @@ import NucleRegister from './components/Nucle/Register';
 import ListNucle from './components/Nucle/ListNucles';
 import LogIn from './components/Login/Login'
 
-import { SignInContext } from '../src/storage/context/SingInContext';
-
 const PublicRoute = ({ component, ...options }) => {
-  const {isLogged} = useContext(SignInContext);
-  const finalComponent = isLogged() ? Dashboard : component;
+  const {isSignedIn} = useSignDataContext();
+  const finalComponent = isSignedIn ? Dashboard : component;
 
   return <Route {...options} component={finalComponent} />;
 };
 
 const PrivateRoute = ({ component, ...options }) => {
-  const {isLogged} = useContext(SignInContext);
-  const finalComponent = isLogged() ? component : LogIn;
+  const {isSignedIn} = useSignDataContext();
+  const finalComponent = isSignedIn ? component : LogIn;
 
   return <Route {...options} component={finalComponent} />;
 };
 
 const App = () => {
-  const {checkToken} = useContext(SignInContext);
+  const {checkToken} = useSignDataContext();
   checkToken();
 
   return(

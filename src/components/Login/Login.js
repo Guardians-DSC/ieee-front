@@ -1,17 +1,17 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Col, Input, Button } from 'antd';
 
 import fieldsValidator from '../../Utils/fieldsValidator';
-import { SignInContext } from '../../storage/context/SingInContext'
+import { useSignDataContext } from '../../storage/context/SingInContext';
 
 import style  from '../../Style/Style'
 
 const Login = () => {  
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const { logIn } = useContext(SignInContext);
-
+  const { logIn } =  useSignDataContext();
+  
   const handleLogin = () => {
     logIn({
       email: email,
