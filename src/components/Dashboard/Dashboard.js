@@ -12,8 +12,6 @@ import style from '../../Style/Style'
 const Dashboard = () => {
   const { getAllTasks } = useContext(TaskContext);
 
-  console.log('rolaaaaaaa')
-
   const renderCard = (tasks) => {
     if (tasks !== undefined) 
       return tasks.map((task,index) => <TaskCard currentask={task} key={index} />);

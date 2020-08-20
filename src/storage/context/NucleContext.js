@@ -16,7 +16,6 @@ export const NucleProvider = ({children}) => {
   function addNucle(nucle) {
     _addNucle(nucle)
     .then(result => {
-      console.log(result.data.data)
       setNucleState({ ...initialState, cNucle: result.data.data, response: result.status });
     })
     .catch(error => {
@@ -29,7 +28,6 @@ export const NucleProvider = ({children}) => {
   function getNucle(nucleName) {
     _getNucle(nucleName)
     .then(result => {
-      console.log(result);
       setNucleState({ ...initialState, cNucle: result.data.data, response: result.status });
     })
     .catch(error => {

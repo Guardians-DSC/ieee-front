@@ -1,20 +1,20 @@
 import React, { createContext, useState } from 'react';
-
 import {_checkToken, _logIn} from '../actions/SignInActions'
+
+const token = localStorage.getItem('T0ken');
 
 export const SignInContext = createContext(null);
 
 export const SignInProvider = ({children}) => {
-  const [signInState, setSignInState] = useState(false);
+  const [signInState, setSignInState] = useState(!!token);
   
+
   function checkToken() {
-    _checkToken(localStorage.getItem('T0ken'))
+    _checkToken(token)
     .then(() => {
-      console.log('then')
       setSignInState(true);
     })
     .catch(() => {
-      console.log('catch')
       setSignInState(false);
     });
   }
@@ -26,7 +26,7 @@ export const SignInProvider = ({children}) => {
   function logIn(data) {
     _logIn(data)
     .then(result => {
-      localStorage.setItem('T0ken', result.data.message.token);
+      localStorage.setItem('T0ken', result.data.data.token);
       setSignInState(true);
     })
     .catch(error => {
