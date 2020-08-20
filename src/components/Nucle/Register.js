@@ -15,7 +15,7 @@ const Register = () => {
     addNucle ({
       name: name
     });
-//    window.location.reload();
+    window.location.reload();
   }
 
   const isUndefinedField = ( field ) => fieldsValidator.isUndefined( field ) ? true : false;
