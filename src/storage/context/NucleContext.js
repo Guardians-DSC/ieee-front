@@ -18,7 +18,8 @@ const NucleProvider = ({children}) => {
       setNucleState({ ...nucleState, cNucle: result.data.data});
     })
     .catch(error => {
-      setNucleState({ nucles: [], cNucle: null });
+      setNucleState(initialState);
+      console.log(error);
     });
   }
 
@@ -28,7 +29,8 @@ const NucleProvider = ({children}) => {
       setNucleState({ ...nucleState, cNucle: result.data.data });
     })
     .catch(error => {
-      setNucleState({ nucles: [], cNucle: null });
+      setNucleState(initialState);
+      console.log(error);
     });
   }
 
@@ -38,7 +40,8 @@ const NucleProvider = ({children}) => {
       setNucleState({ ...nucleState, nucles: result.data.data });
     })
     .catch(error => {
-      setNucleState({ nucles: [], cNucle: null });
+      setNucleState(initialState);
+      console.log(error);
     });
   }
 
@@ -48,18 +51,19 @@ const NucleProvider = ({children}) => {
       setNucleState({ ...nucleState, cNucle: result.data.data });
     })
     .catch(error => {
-      setNucleState({ nucles: [], cNucle: null});
+      setNucleState(initialState);
+      console.log(error);
     });
   }
 
   function deleteNucle(nucleName) {
     _deleteNucle(nucleName)
-    .then(result => {
-      _getAllNucles().then(r => setNucleState({ ...nucleState, nucles: r.data.data}));
-      setNucleState({ ...nucleState, cNucle: result.data.data });
+    .then(() => {
+      _getAllNucles().then(result => setNucleState({ ...nucleState, nucles: result.data.data}));
     })
     .catch(error => {
-      setNucleState({ nucles: [], cNucle: null });
+      setNucleState(initialState);
+      console.log(error);
     });
   }
 

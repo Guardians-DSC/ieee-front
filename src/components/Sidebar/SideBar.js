@@ -1,17 +1,17 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 import style from '../../Style/Style'
 
-import { SignInContext } from '../../storage/context/SingInContext';
+import { useSignDataContext } from '../../storage/context/SingInContext';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 const imgSrc = "https://i1.wp.com/ieeer8.org/wp-content/uploads/2016/04/ieeelogo_512_transparent.png?fit=512%2C512&ssl=1";
 
 const SideBar = () => {
-  const { logOut } = useContext(SignInContext);
+  const { logOut } = useSignDataContext();
   return (
     <Sider breakpoint="lg" collapsedWidth="0" style={{zIndex:1}}>
       <div style={style.logo}>

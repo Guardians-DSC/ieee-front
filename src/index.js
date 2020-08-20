@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { UserProvider } from '../src/storage/context/UserContext';
-import { TaskProvider } from '../src/storage/context/TaskContext';
+import UserProvider from '../src/storage/context/UserContext';
+import TaskProvider from '../src/storage/context/TaskContext';
 import NucleProvider from '../src/storage/context/NucleContext';
 import SignInProvider from '../src/storage/context/SingInContext';
 
