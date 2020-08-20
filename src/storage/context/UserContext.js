@@ -8,7 +8,7 @@ const initialState = {
   users: [],        //All users
   cUser: null,      //Current user
   response: null,   //Backend response
-  token: localStorage.getItem('userToken')
+  token: localStorage.getItem('T0ken')
 };
 
 export const UserProvider = ({children}) => {
