@@ -1,8 +1,8 @@
 import React from 'react'
-import {useState, useEffect, useContext} from 'react';
 import {Row} from 'antd';
 
-import { UserContext } from '../../storage/context/UserContext';
+import { useUserDataContext } from '../../storage/context/UserContext';
+
 import MemberCard from './MemberCard/MemberCard';
 import Sidebar from '../Sidebar/SideBar';
 import 'antd/dist/antd.css';
@@ -10,16 +10,10 @@ import 'antd/dist/antd.css';
 import style from '../../Style/Style'
 
 const ListMembers = () => {
-  const { getAllUsers } = useContext(UserContext);
-  const [users, setUsers] = useState();
-
-  useEffect(() => {
-    const fetchUsers = getAllUsers().users;
-    setUsers(fetchUsers);
-    renderCard(fetchUsers);
-  }, [users, getAllUsers]);
+  const { getAllUsers, users } = useUserDataContext();
 
   const renderCard = (users) => {
+    getAllUsers();
     if (users !== undefined) {
       return users.map((user,index) => <MemberCard currentUser={user} key={index} />);
     }

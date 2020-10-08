@@ -11,7 +11,7 @@ const PopupDelete = e => {
     <div>
       <Modal 
         visible={true}
-        title="Cadastro de Atividade"
+        title="Remover Atividade"
         onOk={e.onClose}
         onCancel={e.onClose}
         style={{top:'5rem'}}

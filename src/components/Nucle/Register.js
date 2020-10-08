@@ -1,21 +1,22 @@
 import React from 'react';
-import fieldsValidator from '../../Utils/fieldsValidator';
-import {useState, useContext} from 'react';
+import {useState} from 'react';
 import { Col, Input, Button } from 'antd';import 'antd/dist/antd.css';
-import { NucleContext } from '../../storage/context/NucleContext';
-import SideBar from '../Sidebar/SideBar';
 
+import fieldsValidator from '../../Utils/fieldsValidator';
+import SideBar from '../Sidebar/SideBar';
 import style from '../../Style/Style'
 
+import { useNucleDataContext } from '../../storage/context/NucleContext';
+
 const Register = () => {
-  const { addNucle } = useContext(NucleContext);
+  const { addNucle } = useNucleDataContext();
   const [name, setName] = useState();
   
   const handleSubmit = () => {
     addNucle ({
       name: name
     });
-//    window.location.reload();
+    window.location.reload();
   }
 
   const isUndefinedField = ( field ) => fieldsValidator.isUndefined( field ) ? true : false;

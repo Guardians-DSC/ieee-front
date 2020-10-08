@@ -1,8 +1,8 @@
 import React from 'react'
 import { Modal, Button } from 'antd';
-import ModalEdit from './ModalEdit';
+import ModalDelete from './ModalDelete';
 
-const PopupEdit = e => {
+const PopupDelete = e => {
 
   if (!e.openPopup)
       return null
@@ -11,7 +11,7 @@ const PopupEdit = e => {
     <div>
       <Modal 
         visible={true}
-        title="Atualizar Atividade"
+        title="Remover Membro"
         onOk={e.onClose}
         onCancel={e.onClose}
         style={{top:'5rem'}}
@@ -21,11 +21,10 @@ const PopupEdit = e => {
           </Button>
           }
         >
-          <ModalEdit task={e.task}/>
+          <ModalDelete user={e.user}/>
       </Modal>
     </div>
   )
 }
 
-
-export default PopupEdit;
+export default PopupDelete;

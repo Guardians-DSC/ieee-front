@@ -1,8 +1,8 @@
 import React from 'react'
-import {useState, useEffect, useContext} from 'react';
 import {Row} from 'antd';
 
-import { NucleContext } from '../../storage/context/NucleContext';
+import { useNucleDataContext } from '../../storage/context/NucleContext';
+
 import NucleCard from './NucleCard/NucleCard';
 import Sidebar from '../Sidebar/SideBar';
 import 'antd/dist/antd.css';
@@ -10,16 +10,10 @@ import 'antd/dist/antd.css';
 import style from '../../Style/Style'
 
 const ListNucles = () => {
-  const { getAllNucles } = useContext(NucleContext);
-  const [nucles, setNucles] = useState();
-
-  useEffect(() => {
-    const fetchNucles = getAllNucles().nucles;
-    setNucles(fetchNucles);
-    renderCard(fetchNucles);
-  }, [nucles, getAllNucles]);
+  const { getAllNucles, nucles } = useNucleDataContext();
 
   const renderCard = (nucles) => {
+    getAllNucles();
     if (nucles !== undefined) {
       return nucles.map((nucle,index) => <NucleCard currentNucle={nucle} key={index} />);
     }
